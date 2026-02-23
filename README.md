@@ -2,12 +2,9 @@
 
 # Hekaya (حكاية)
 
-<!-- TODO: Uncomment badges after GitHub repo is created and services are configured
 [![CI](https://github.com/michaelkmalak/hekaya/actions/workflows/ci.yml/badge.svg)](https://github.com/michaelkmalak/hekaya/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/michaelkmalak/hekaya)](https://github.com/michaelkmalak/hekaya/releases)
-[![codecov](https://codecov.io/gh/michaelkmalak/hekaya/graph/badge.svg)](https://codecov.io/gh/michaelkmalak/hekaya)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
--->
 
 A screenplay markup language and toolchain built for Egyptian and Arabic-speaking screenwriters.
 

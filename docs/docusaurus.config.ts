@@ -11,8 +11,8 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://hekaya.dev',
-  baseUrl: '/',
+  url: 'https://michaelkmalak.github.io',
+  baseUrl: '/hekaya/',
 
   organizationName: 'michaelkmalak',
   projectName: 'hekaya',
