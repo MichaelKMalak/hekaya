@@ -37,6 +37,7 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts",
+    "fonts": "sh scripts/download-fonts.sh",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest"
   },
