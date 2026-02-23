@@ -1,0 +1,54 @@
+{
+  "name": "@hekaya/pdf",
+  "version": "0.1.0",
+  "description": "PDF generator for Hekaya screenplays with Arabic/RTL support",
+  "license": "MIT",
+  "author": "Cairo Indie Filmmakers Club",
+  "keywords": [
+    "screenplay",
+    "arabic",
+    "rtl",
+    "fountain",
+    "pdf",
+    "hekaya"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaelkmalak/hekaya.git",
+    "directory": "packages/hekaya-pdf"
+  },
+  "bugs": {
+    "url": "https://github.com/michaelkmalak/hekaya/issues"
+  },
+  "homepage": "https://github.com/michaelkmalak/hekaya#readme",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "fonts": "sh scripts/download-fonts.sh",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@hekaya/parser": "workspace:*",
+    "pdfmake": "^0.3.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.1.9"
+  }
+}

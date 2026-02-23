@@ -1,0 +1,48 @@
+{
+  "name": "hekaya",
+  "private": true,
+  "description": "Arabic-first screenplay markup language and toolchain",
+  "license": "MIT",
+  "author": "Cairo Indie Filmmakers Club",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaelkmalak/hekaya.git"
+  },
+  "bugs": {
+    "url": "https://github.com/michaelkmalak/hekaya/issues"
+  },
+  "homepage": "https://github.com/michaelkmalak/hekaya#readme",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "test:coverage": "pnpm -r test -- --coverage",
+    "test:watch": "pnpm -r test:watch",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "packageManager": "pnpm@8.4.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "eslint": "^10.0.1",
+    "husky": "^9.0.0",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.0.0",
+    "typescript-eslint": "^8.56.0"
+  }
+}

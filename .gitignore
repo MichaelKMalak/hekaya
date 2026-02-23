@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+*.local
+coverage/
+.env
+.env.*
+packages/hekaya-pdf/fonts/*.ttf
+packages/hekaya-pdf/fonts/*.otf
+docs/build/
+docs/.docusaurus/

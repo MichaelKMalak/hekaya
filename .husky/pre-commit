@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Run lint-staged (lint + format staged files)
+npx lint-staged || exit 1
+
+# Run tests
+pnpm test 2>/dev/null || exit 1
