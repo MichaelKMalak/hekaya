@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - "docs/**"
-      - ".github/workflows/docs.yml"
+      - 'docs/**'
+      - '.github/workflows/docs.yml'
   workflow_dispatch:
 
 permissions:
@@ -28,8 +28,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
+      - run: npm install
+      - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs/build
