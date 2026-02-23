@@ -47,6 +47,28 @@ Hekaya is to Egyptian and Arabic-speaking screenwriters what Fountain is to Engl
 | `@hekaya/pdf`      | PDF generator with proper font support      | [![pdf](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=pdf)](https://codecov.io/github/MichaelKMalak/hekaya)           |
 | `@hekaya/cli`      | Command-line tool                           | [![cli](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=cli)](https://codecov.io/github/MichaelKMalak/hekaya)           |
 
+## Try It
+
+Download a pre-built binary from the [Releases page](https://github.com/michaelkmalak/hekaya/releases) — no installation needed, just [Node.js](https://nodejs.org/) 20+:
+
+```bash
+# Download the binary for your platform (example: macOS ARM)
+curl -LO https://github.com/michaelkmalak/hekaya/releases/latest/download/hekaya-macos-arm64.cjs
+
+# Run it
+node hekaya-macos-arm64.cjs render script.hekaya -o script.html
+node hekaya-macos-arm64.cjs export script.hekaya -o script.pdf
+```
+
+Or build from source:
+
+```bash
+git clone https://github.com/michaelkmalak/hekaya.git
+cd hekaya
+pnpm install && pnpm build
+node apps/hekaya-cli/dist/index.js render script.hekaya -o script.html
+```
+
 ## Quick Start
 
 ```bash
