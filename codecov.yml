@@ -6,3 +6,49 @@ coverage:
     patch:
       default:
         target: auto
+
+flag_management:
+  default_rules:
+    carryforward: true
+    statuses:
+      - type: project
+        target: auto
+      - type: patch
+        target: auto
+
+  individual_flags:
+    - name: parser
+      paths:
+        - packages/hekaya-parser/src/
+      carryforward: true
+    - name: renderer
+      paths:
+        - packages/hekaya-renderer/src/
+      carryforward: true
+    - name: pdf
+      paths:
+        - packages/hekaya-pdf/src/
+      carryforward: true
+    - name: cli
+      paths:
+        - apps/hekaya-cli/src/
+      carryforward: true
+
+component_management:
+  individual_components:
+    - component_id: parser
+      name: Parser
+      paths:
+        - packages/hekaya-parser/src/**
+    - component_id: renderer
+      name: Renderer
+      paths:
+        - packages/hekaya-renderer/src/**
+    - component_id: pdf
+      name: PDF Generator
+      paths:
+        - packages/hekaya-pdf/src/**
+    - component_id: cli
+      name: CLI
+      paths:
+        - apps/hekaya-cli/src/**

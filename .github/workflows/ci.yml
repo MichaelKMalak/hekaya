@@ -24,9 +24,31 @@ jobs:
       - name: Download PDF fonts
         run: pnpm --filter @hekaya/pdf fonts
       - run: pnpm test:coverage
-      - name: Upload coverage
+      - name: Upload parser coverage
         if: matrix.node-version == 22
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true
+          flags: parser
+          files: packages/hekaya-parser/coverage/coverage-final.json
+      - name: Upload renderer coverage
+        if: matrix.node-version == 22
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: renderer
+          files: packages/hekaya-renderer/coverage/coverage-final.json
+      - name: Upload PDF coverage
+        if: matrix.node-version == 22
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: pdf
+          files: packages/hekaya-pdf/coverage/coverage-final.json
+      - name: Upload CLI coverage
+        if: matrix.node-version == 22
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: cli
+          files: apps/hekaya-cli/coverage/coverage-final.json
