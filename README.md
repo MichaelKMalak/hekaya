@@ -65,19 +65,19 @@ hekaya validate script.hekaya
 
 ## Samples
 
-The [`samples/`](samples/) directory contains complete `.hekaya` screenplays:
+Full sample screenplays are available on the [documentation site](https://michaelkmalak.github.io/hekaya/docs/examples/full-drama) for best RTL readability:
 
-| File                                                         | Description                                                        |
-| ------------------------------------------------------------ | ------------------------------------------------------------------ |
-| [`آخر-أيام-الصيف.hekaya`](samples/آخر-أيام-الصيف.hekaya)     | Drama — a writer rediscovering hope in Cairo                       |
-| [`بكرا-السما-ح-تقع.hekaya`](samples/بكرا-السما-ح-تقع.hekaya) | Comedy — a satirical tale of misinformation spreading across Cairo |
+| Sample                                                                               | Description                                                        |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| [آخر أيام الصيف](https://michaelkmalak.github.io/hekaya/docs/examples/full-drama)    | Drama — a writer rediscovering hope in Cairo                       |
+| [بكرا السما ح تقع](https://michaelkmalak.github.io/hekaya/docs/examples/full-comedy) | Comedy — a satirical tale of misinformation spreading across Cairo |
 
 ## Documentation
 
-- [Hekaya Markup Specification](docs/spec/hekaya-markup-spec.md)
-- [Fountain Compatibility](docs/spec/fountain-compatibility.md)
-- [Architecture](docs/architecture.md)
-- [Research & References](docs/research/)
+- [Hekaya Markup Specification](https://michaelkmalak.github.io/hekaya/docs/spec/hekaya-markup-spec)
+- [Fountain Compatibility](https://michaelkmalak.github.io/hekaya/docs/spec/fountain-compatibility)
+- [Architecture](https://michaelkmalak.github.io/hekaya/docs/architecture)
+- [Research & References](https://michaelkmalak.github.io/hekaya/docs/research/references)
 
 ## Roadmap
 

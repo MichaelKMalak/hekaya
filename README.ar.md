@@ -4,6 +4,11 @@
 
 # حكاية (Hekaya)
 
+[![CI](https://github.com/michaelkmalak/hekaya/actions/workflows/ci.yml/badge.svg)](https://github.com/michaelkmalak/hekaya/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/michaelkmalak/hekaya)](https://github.com/michaelkmalak/hekaya/releases)
+[![codecov](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY)](https://codecov.io/github/MichaelKMalak/hekaya)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 لغة ترميز وأدوات لكتابة السيناريو مصممة للكتّاب المصريين والناطقين بالعربية.
 
 حكاية بتوسّع مواصفات [Fountain](https://fountain.io/) بدعم كامل للكتابة من اليمين لليسار (RTL)، وبتخلي كتّاب السيناريو في مصر والعالم العربي يقدروا يكتبوا سيناريوهات بصيغة نص عادي وتطلع بشكل احترافي.
@@ -62,19 +67,19 @@ hekaya validate script.hekaya
 
 ## نماذج
 
-مجلد [`samples/`](samples/) فيه سيناريوهات `.hekaya` كاملة:
+النماذج الكاملة متاحة على [موقع التوثيق](https://michaelkmalak.github.io/hekaya/docs/examples/full-drama) لقراءة أفضل بالعربي:
 
-| الملف                                                        | الوصف                                               |
-| ------------------------------------------------------------ | --------------------------------------------------- |
-| [`آخر-أيام-الصيف.hekaya`](samples/آخر-أيام-الصيف.hekaya)     | دراما — كاتب بيكتشف الأمل من جديد في القاهرة        |
-| [`بكرا-السما-ح-تقع.hekaya`](samples/بكرا-السما-ح-تقع.hekaya) | كوميديا — حكاية ساخرة عن انتشار الشائعات في القاهرة |
+| النموذج                                                                              | الوصف                                               |
+| ------------------------------------------------------------------------------------ | --------------------------------------------------- |
+| [آخر أيام الصيف](https://michaelkmalak.github.io/hekaya/docs/examples/full-drama)    | دراما — كاتب بيكتشف الأمل من جديد في القاهرة        |
+| [بكرا السما ح تقع](https://michaelkmalak.github.io/hekaya/docs/examples/full-comedy) | كوميديا — حكاية ساخرة عن انتشار الشائعات في القاهرة |
 
 ## التوثيق
 
-- [مواصفات ترميز حكاية](docs/spec/hekaya-markup-spec.md)
-- [التوافق مع Fountain](docs/spec/fountain-compatibility.md)
-- [البنية المعمارية](docs/architecture.md)
-- [البحث والمراجع](docs/research/)
+- [مواصفات ترميز حكاية](https://michaelkmalak.github.io/hekaya/docs/spec/hekaya-markup-spec)
+- [التوافق مع Fountain](https://michaelkmalak.github.io/hekaya/docs/spec/fountain-compatibility)
+- [البنية المعمارية](https://michaelkmalak.github.io/hekaya/docs/architecture)
+- [البحث والمراجع](https://michaelkmalak.github.io/hekaya/docs/research/references)
 
 ## خارطة الطريق
 

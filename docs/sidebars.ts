@@ -25,6 +25,8 @@ const sidebars: SidebarsConfig = {
         'examples/bilingual',
         'examples/feature-film',
         'examples/short-comedy',
+        'examples/full-drama',
+        'examples/full-comedy',
       ],
     },
   ],
