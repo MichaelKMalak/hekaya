@@ -49,6 +49,28 @@
 | `@hekaya/pdf`      | مُولّد PDF بخطوط عربية                   | [![pdf](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=pdf)](https://codecov.io/github/MichaelKMalak/hekaya)           |
 | `@hekaya/cli`      | أداة سطر الأوامر                         | [![cli](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=cli)](https://codecov.io/github/MichaelKMalak/hekaya)           |
 
+## جربها
+
+حمّل الملف التنفيذي من [صفحة الإصدارات](https://github.com/michaelkmalak/hekaya/releases) — محتاج بس [Node.js](https://nodejs.org/) نسخة 20 أو أعلى:
+
+```bash
+# حمّل الملف حسب نظامك (مثال: macOS ARM)
+curl -LO https://github.com/michaelkmalak/hekaya/releases/latest/download/hekaya-macos-arm64.cjs
+
+# شغّله
+node hekaya-macos-arm64.cjs render script.hekaya -o script.html
+node hekaya-macos-arm64.cjs export script.hekaya -o script.pdf
+```
+
+أو ابنيها من الكود:
+
+```bash
+git clone https://github.com/michaelkmalak/hekaya.git
+cd hekaya
+pnpm install && pnpm build
+node apps/hekaya-cli/dist/index.js render script.hekaya -o script.html
+```
+
 ## بداية سريعة
 
 ```bash
