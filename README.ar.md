@@ -42,12 +42,12 @@
 
 ## الحزم
 
-| الحزمة             | الوصف                                    |
-| ------------------ | ---------------------------------------- |
-| `@hekaya/parser`   | محلل الترميز الأساسي (بدون أي اعتماديات) |
-| `@hekaya/renderer` | مُصيّر HTML بدعم كامل لـ RTL             |
-| `@hekaya/pdf`      | مُولّد PDF بخطوط عربية                   |
-| `@hekaya/cli`      | أداة سطر الأوامر                         |
+| الحزمة             | الوصف                                    | التغطية                                                                                                                                                      |
+| ------------------ | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `@hekaya/parser`   | محلل الترميز الأساسي (بدون أي اعتماديات) | [![parser](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=parser)](https://codecov.io/github/MichaelKMalak/hekaya)     |
+| `@hekaya/renderer` | مُصيّر HTML بدعم كامل لـ RTL             | [![renderer](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=renderer)](https://codecov.io/github/MichaelKMalak/hekaya) |
+| `@hekaya/pdf`      | مُولّد PDF بخطوط عربية                   | [![pdf](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=pdf)](https://codecov.io/github/MichaelKMalak/hekaya)           |
+| `@hekaya/cli`      | أداة سطر الأوامر                         | [![cli](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=cli)](https://codecov.io/github/MichaelKMalak/hekaya)           |
 
 ## بداية سريعة
 

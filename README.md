@@ -40,12 +40,12 @@ Hekaya is to Egyptian and Arabic-speaking screenwriters what Fountain is to Engl
 
 ## Packages
 
-| Package            | Description                                 |
-| ------------------ | ------------------------------------------- |
-| `@hekaya/parser`   | Core markup parser (zero dependencies)      |
-| `@hekaya/renderer` | HTML renderer with RTL-aware screenplay CSS |
-| `@hekaya/pdf`      | PDF generator with proper font support      |
-| `@hekaya/cli`      | Command-line tool                           |
+| Package            | Description                                 | Coverage                                                                                                                                                     |
+| ------------------ | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `@hekaya/parser`   | Core markup parser (zero dependencies)      | [![parser](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=parser)](https://codecov.io/github/MichaelKMalak/hekaya)     |
+| `@hekaya/renderer` | HTML renderer with RTL-aware screenplay CSS | [![renderer](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=renderer)](https://codecov.io/github/MichaelKMalak/hekaya) |
+| `@hekaya/pdf`      | PDF generator with proper font support      | [![pdf](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=pdf)](https://codecov.io/github/MichaelKMalak/hekaya)           |
+| `@hekaya/cli`      | Command-line tool                           | [![cli](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=cli)](https://codecov.io/github/MichaelKMalak/hekaya)           |
 
 ## Quick Start
 
