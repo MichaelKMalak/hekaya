@@ -1,0 +1,49 @@
+{
+  "name": "@hekaya/cli",
+  "version": "0.1.0",
+  "description": "Command-line tool for Hekaya screenplay markup",
+  "license": "MIT",
+  "author": "Cairo Indie Filmmakers Club",
+  "keywords": [
+    "screenplay",
+    "arabic",
+    "rtl",
+    "fountain",
+    "cli",
+    "hekaya"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaelkmalak/hekaya.git",
+    "directory": "apps/hekaya-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/michaelkmalak/hekaya/issues"
+  },
+  "homepage": "https://github.com/michaelkmalak/hekaya#readme",
+  "type": "module",
+  "bin": {
+    "hekaya": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@hekaya/parser": "workspace:*",
+    "@hekaya/renderer": "workspace:*",
+    "@hekaya/pdf": "workspace:*",
+    "commander": "^12.0.0",
+    "chalk": "^5.3.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.4.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.1.9",
+    "@types/node": "^22.0.0"
+  }
+}
