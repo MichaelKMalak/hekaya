@@ -1,3 +1,13 @@
 #!/bin/sh
 
-npx --no -- commitlint --edit "$1"
+npx --no -- commitlint --edit "$1" || exit 1
+
+# Enforce: feat commits must include docs/ changes
+MSG=$(head -1 "$1")
+if echo "$MSG" | grep -q "^feat"; then
+  if ! git diff --cached --name-only | grep -q "^docs/"; then
+    echo "ERROR: feat commits must include documentation updates in docs/"
+    echo "Please update the relevant docs and stage them before committing."
+    exit 1
+  fi
+fi
