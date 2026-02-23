@@ -23,9 +23,8 @@ jobs:
       - run: pnpm build
       - name: Download PDF fonts
         run: pnpm --filter @hekaya/pdf fonts
-      - run: pnpm test
-      # TODO: Uncomment after setting up Codecov and adding CODECOV_TOKEN secret
-      # - name: Upload coverage
-      #   uses: codecov/codecov-action@v5
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
+      - run: pnpm test:coverage
+      - name: Upload coverage
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
