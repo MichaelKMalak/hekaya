@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0](https://github.com/MichaelKMalak/hekaya/compare/v1.2.0...v1.3.0) (2026-02-24)
+
+
+### Features
+
+* add PDF RTL rendering, serializer, and convert command ([dbe71d4](https://github.com/MichaelKMalak/hekaya/commit/dbe71d4b066f76e7f27b068a376c9267b039db7c))
+* add Try It section and fix release binary build ([1da68c3](https://github.com/MichaelKMalak/hekaya/commit/1da68c30c7d17584f7f9a6c82871b15b6d23e01e))
+
+
+### Bug Fixes
+
+* **pdf:** update font download script for Cascadia Mono ([b53352a](https://github.com/MichaelKMalak/hekaya/commit/b53352a50b201075ecfa4102acdd852483956afc))
+
 ## [1.2.0](https://github.com/MichaelKMalak/hekaya/compare/v1.1.0...v1.2.0) (2026-02-23)
 
 
