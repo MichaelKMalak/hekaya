@@ -46,6 +46,7 @@ export const TITLE_KEYS_AR: Record<string, string> = {
   حقوق: 'copyright',
   ملاحظات: 'notes',
   ائتمان: 'credit',
+  تأليف: 'credit',
   اتجاه: 'direction',
 };
 

@@ -47,7 +47,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Bundle CLI
-        run: pnpm exec esbuild apps/hekaya-cli/dist/index.js --bundle --platform=node --outfile=hekaya-${{ matrix.target }}.cjs --external:pdfmake
+        run: pnpm exec esbuild apps/hekaya-cli/dist/index.js --bundle --platform=node --outfile=hekaya-${{ matrix.target }}.cjs --external:@digicole/pdfmake-rtl
       - name: Upload binary
         uses: softprops/action-gh-release@v2
         with:

@@ -53,6 +53,15 @@ describe('TITLE_KEYS_AR', () => {
       expect(value).toMatch(/^[a-z_\s]+$/);
     }
   });
+
+  it('maps تأليف to credit', () => {
+    expect(TITLE_KEYS_AR['تأليف']).toBe('credit');
+  });
+
+  it('maps both ائتمان and تأليف to credit', () => {
+    expect(TITLE_KEYS_AR['ائتمان']).toBe('credit');
+    expect(TITLE_KEYS_AR['تأليف']).toBe('credit');
+  });
 });
 
 describe('TITLE_KEYS_EN', () => {

@@ -272,6 +272,64 @@ describe('validate command', () => {
   });
 });
 
+describe('convert command', () => {
+  let mockConsoleError: ReturnType<typeof vi.spyOn>;
+  let mockProcessExit: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+    mockConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    mockProcessExit = vi.spyOn(process, 'exit').mockImplementation(() => undefined as never);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('converts .hekaya to .fountain with -o', async () => {
+    const outPath = tmpPath('convert-output.fountain');
+    const { convertCommand } = await import('../src/commands/convert');
+
+    try {
+      await convertCommand.parseAsync(['node', 'hekaya', FIXTURE_PATH, '-o', outPath]);
+
+      expect(existsSync(outPath)).toBe(true);
+      const content = readFileSync(outPath, 'utf-8');
+      expect(content).toContain('اختبار');
+    } finally {
+      if (existsSync(outPath)) unlinkSync(outPath);
+    }
+  });
+
+  it('output is valid Fountain text', async () => {
+    const outPath = tmpPath('roundtrip.fountain');
+    const { convertCommand } = await import('../src/commands/convert');
+
+    try {
+      await convertCommand.parseAsync(['node', 'hekaya', FIXTURE_PATH, '-o', outPath]);
+
+      expect(existsSync(outPath)).toBe(true);
+      const content = readFileSync(outPath, 'utf-8');
+      // Should contain serialized elements from the fixture
+      expect(content.length).toBeGreaterThan(0);
+      // Re-parse the output to verify it's valid
+      const { Hekaya } = await import('@hekaya/parser');
+      const reparsed = Hekaya.parse(content);
+      expect(reparsed.tokens.length).toBeGreaterThan(0);
+    } finally {
+      if (existsSync(outPath)) unlinkSync(outPath);
+    }
+  });
+
+  it('exits 1 on file not found', async () => {
+    const { convertCommand } = await import('../src/commands/convert');
+    await convertCommand.parseAsync(['node', 'hekaya', '/nonexistent/file.hekaya']);
+
+    expect(mockConsoleError).toHaveBeenCalled();
+    expect(mockProcessExit).toHaveBeenCalledWith(1);
+  });
+});
+
 describe('utils', () => {
   it('getErrorMessage handles Error instances', async () => {
     const { getErrorMessage } = await import('../src/utils');

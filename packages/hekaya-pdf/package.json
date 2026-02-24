@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@hekaya/parser": "workspace:*",
-    "pdfmake": "^0.3.5"
+    "@digicole/pdfmake-rtl": "^2.1.2"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

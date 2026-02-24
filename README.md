@@ -83,6 +83,9 @@ hekaya export script.hekaya -o script.pdf
 
 # Validate
 hekaya validate script.hekaya
+
+# Convert between .hekaya and .fountain
+hekaya convert script.hekaya -o script.fountain
 ```
 
 ## Samples

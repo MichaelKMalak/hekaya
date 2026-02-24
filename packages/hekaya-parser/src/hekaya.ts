@@ -11,6 +11,7 @@
 
 import type { HekayaScript, ParseOptions } from './types';
 import { parse } from './lexer';
+import { serialize } from './serializer';
 
 export class Hekaya {
   /**
@@ -22,5 +23,15 @@ export class Hekaya {
    */
   static parse(input: string, options?: ParseOptions): HekayaScript {
     return parse(input, options);
+  }
+
+  /**
+   * Serialize a parsed HekayaScript back to Fountain/Hekaya plain text.
+   *
+   * @param script - The parsed screenplay structure
+   * @returns Plain text in Fountain/Hekaya format
+   */
+  static serialize(script: HekayaScript): string {
+    return serialize(script);
   }
 }

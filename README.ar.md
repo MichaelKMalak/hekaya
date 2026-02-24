@@ -85,6 +85,9 @@ hekaya export script.hekaya -o script.pdf
 
 # التحقق من الصحة
 hekaya validate script.hekaya
+
+# تحويل بين .hekaya و .fountain
+hekaya convert script.hekaya -o script.fountain
 ```
 
 ## نماذج

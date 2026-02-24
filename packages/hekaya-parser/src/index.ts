@@ -18,6 +18,9 @@ export type {
   ParseOptions,
 } from './types';
 
+// Serializer
+export { serialize } from './serializer';
+
 // Utilities
 export { CharacterRegistry } from './character-registry';
 export { detectDirection, containsArabic, applyDirectionMarker } from './bidi';

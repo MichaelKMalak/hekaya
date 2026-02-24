@@ -136,6 +136,39 @@ Hello there.`);
     });
   });
 
+  describe('RTL number handling', () => {
+    it('handles Arabic-Indic digits in dates', async () => {
+      const script = Hekaya.parse(`العنوان: اختبار
+تاريخ: ٢٠٢٦/٢/٢٤
+
+داخلي - قهوة - نهار
+
+@سمير
+الساعة ٣:٤٥ الصبح.`);
+
+      const pdf = await generatePdf(script);
+      expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
+    });
+
+    it('handles Western digits in dialogue', async () => {
+      const script = Hekaya.parse(`\nداخلي - قهوة - نهار\n\n@سمير\nPhone: 0100-123-4567`);
+      const pdf = await generatePdf(script);
+      expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
+    });
+
+    it('handles mixed Arabic-Indic and Western digits', async () => {
+      const script = Hekaya.parse(`\nداخلي - قهوة - نهار\n\nالحساب ١٢٥ جنيه يعني 125 EGP.`);
+      const pdf = await generatePdf(script);
+      expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
+    });
+
+    it('handles large numbers and currency', async () => {
+      const script = Hekaya.parse(`\nداخلي - بنك - نهار\n\n@حسن\nالمبلغ ١٢٥٬٠٠٠ جنيه.`);
+      const pdf = await generatePdf(script);
+      expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
+    });
+  });
+
   describe('integration', () => {
     it('renders a complete Arabic screenplay', async () => {
       const script = Hekaya.parse(`العنوان: آخر أيام الصيف
@@ -168,6 +201,56 @@ Hello there.`);
       expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
       // A full screenplay with title page should be > 5KB
       expect(pdf.length).toBeGreaterThan(5000);
+    });
+  });
+
+  describe('title page formatting', () => {
+    it('generates PDF with formatted title (bold/italic markers)', async () => {
+      const script = Hekaya.parse(`العنوان: _**الليلة الكبيرة**_
+تأليف: قصة أصلية
+المؤلف: أحمد محمود
+
+داخلي - شقة - ليل`);
+
+      const pdf = await generatePdf(script);
+      expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
+      expect(pdf.length).toBeGreaterThan(1000);
+    });
+
+    it('generates PDF with credit keyword تأليف', async () => {
+      const script = Hekaya.parse(`العنوان: اختبار
+تأليف: قصة أصلية
+
+داخلي - قهوة - نهار`);
+
+      expect(script.titleEntries.find((e) => e.key === 'credit')).toBeDefined();
+      const pdf = await generatePdf(script);
+      expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
+    });
+  });
+
+  describe('centered and transition alignment', () => {
+    it('generates PDF with centered text', async () => {
+      const script = Hekaya.parse(`\n>**النهاية**<`);
+      const pdf = await generatePdf(script);
+      expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
+    });
+
+    it('generates PDF with bold-italic inline formatting', async () => {
+      const script = Hekaya.parse(
+        `\nداخلي - شقة - ليل\n\n@سمير\nأهلاً بيكم في ***الليلة الكبيرة***!`,
+      );
+      const pdf = await generatePdf(script);
+      expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
+    });
+  });
+
+  describe('dual dialogue', () => {
+    it('generates PDF with dual dialogue blocks', async () => {
+      const script = Hekaya.parse(`\n@سمير\nأنا هنا.\n\n@نادية ^\nأنا كمان.`);
+      const pdf = await generatePdf(script);
+      expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
+      expect(pdf.length).toBeGreaterThan(1000);
     });
   });
 });

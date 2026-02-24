@@ -8,6 +8,7 @@
  *   render   - Render a .hekaya file to HTML
  *   export   - Export a .hekaya file to PDF
  *   validate - Validate a .hekaya file for errors
+ *   convert  - Convert between .hekaya and .fountain formats
  */
 
 import { Command } from 'commander';
@@ -15,6 +16,7 @@ import { parseCommand } from './commands/parse';
 import { renderCommand } from './commands/render';
 import { exportCommand } from './commands/export';
 import { validateCommand } from './commands/validate';
+import { convertCommand } from './commands/convert';
 
 const program = new Command();
 
@@ -24,5 +26,6 @@ program.addCommand(parseCommand);
 program.addCommand(renderCommand);
 program.addCommand(exportCommand);
 program.addCommand(validateCommand);
+program.addCommand(convertCommand);
 
 program.parse();

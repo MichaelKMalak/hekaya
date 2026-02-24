@@ -1,12 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { getFontPaths, ARABIC_FONT, ENGLISH_FONT, FONTS_DIRECTORY } from '../src/fonts';
+import { getFontPaths, getArabicFontName, ENGLISH_FONT, FONTS_DIRECTORY } from '../src/fonts';
 import { existsSync } from 'node:fs';
 import { isAbsolute } from 'node:path';
 
 describe('font constants', () => {
-  it('ARABIC_FONT is a non-empty string', () => {
-    expect(typeof ARABIC_FONT).toBe('string');
-    expect(ARABIC_FONT.length).toBeGreaterThan(0);
+  it('getArabicFontName returns CascadiaMono', () => {
+    expect(getArabicFontName()).toBe('CascadiaMono');
   });
 
   it('ENGLISH_FONT is a non-empty string', () => {
@@ -20,16 +19,15 @@ describe('font constants', () => {
 });
 
 describe('getFontPaths', () => {
-  it('returns font descriptors for both Arabic and English fonts', () => {
+  it('returns Cascadia Mono + Courier', () => {
     const paths = getFontPaths();
-    expect(paths).toHaveProperty(ARABIC_FONT);
+    expect(paths).toHaveProperty('CascadiaMono');
     expect(paths).toHaveProperty(ENGLISH_FONT);
   });
 
   it('each font family has all 4 variants', () => {
     const paths = getFontPaths();
-    for (const fontName of [ARABIC_FONT, ENGLISH_FONT]) {
-      const family = paths[fontName];
+    for (const family of Object.values(paths)) {
       expect(family).toHaveProperty('normal');
       expect(family).toHaveProperty('bold');
       expect(family).toHaveProperty('italics');

@@ -11,6 +11,7 @@ export interface PdfTextSegment {
   bold?: boolean;
   italics?: boolean;
   decoration?: string;
+  alignment?: 'left' | 'center' | 'right';
 }
 
 /** Inline formatting style applied to text segments. */
@@ -40,12 +41,19 @@ export interface PdfColumnDef {
   width: string | number;
   stack?: PdfContentNode[];
   text?: string;
+  bold?: boolean;
+  alignment?: 'left' | 'center' | 'right';
+  margin?: [number, number, number, number];
+  fontSize?: number;
+  font?: string;
 }
 
 /** A pdfmake columns layout container. */
 export interface PdfColumnsNode {
   columns: PdfColumnDef[];
   columnGap: number;
+  margin?: [number, number, number, number];
+  bold?: boolean;
 }
 
 /** Union of all content node types used in document body. */
@@ -61,5 +69,5 @@ export interface PdfDocDefinition {
     fontSize: number;
     lineHeight: number;
   };
-  footer: (currentPage: number, pageCount: number) => PdfTextNode | null;
+  header: (currentPage: number, pageCount: number) => PdfContentNode | null;
 }

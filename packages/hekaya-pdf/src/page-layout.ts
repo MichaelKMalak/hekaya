@@ -97,15 +97,15 @@ export function getElementLayouts(dir: 'rtl' | 'ltr'): Record<string, ElementLay
     },
 
     parenthetical: {
-      ...bothIndent(0.6, 2.0),
-      alignment: isRtl ? 'right' : 'left',
+      ...bothIndent(1.5, 2.0),
+      alignment: 'center',
       marginBottom: 0,
     },
 
     transition: {
       marginLeft: 0,
       marginRight: 0,
-      alignment: 'center',
+      alignment: isRtl ? 'left' : 'right',
       bold: true,
       marginTop: 12,
       marginBottom: 12,
@@ -147,7 +147,7 @@ export function getElementLayouts(dir: 'rtl' | 'ltr'): Record<string, ElementLay
 
 /** Font sizes for RTL (Arabic) and LTR (English) scripts. */
 export const FONT_CONFIG = {
-  rtl: { fontSize: 14, lineHeight: 1.6 },
+  rtl: { fontSize: 12, lineHeight: 1.5 },
   ltr: { fontSize: 12, lineHeight: 1.0 },
 };
 

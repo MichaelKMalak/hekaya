@@ -9,7 +9,7 @@ export type {
   InlineStyle,
   PdfColumnDef,
 } from './pdf-types';
-export { getFontPaths, ARABIC_FONT, ENGLISH_FONT, FONTS_DIRECTORY } from './fonts';
+export { getFontPaths, getArabicFontName, ENGLISH_FONT, FONTS_DIRECTORY } from './fonts';
 export {
   PAGE_SIZE,
   getPageMargins,

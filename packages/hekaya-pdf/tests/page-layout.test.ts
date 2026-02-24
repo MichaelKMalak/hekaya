@@ -66,9 +66,9 @@ describe('getElementLayouts', () => {
     expect(rtlChar.alignment).not.toBe(ltrChar.alignment);
   });
 
-  it('transition is centered', () => {
-    expect(getElementLayouts('rtl').transition.alignment).toBe('center');
-    expect(getElementLayouts('ltr').transition.alignment).toBe('center');
+  it('transition is opposite-side aligned', () => {
+    expect(getElementLayouts('rtl').transition.alignment).toBe('left');
+    expect(getElementLayouts('ltr').transition.alignment).toBe('right');
   });
 
   it('dialogue has indentation', () => {
@@ -80,8 +80,9 @@ describe('getElementLayouts', () => {
 });
 
 describe('FONT_CONFIG', () => {
-  it('RTL has larger fontSize than LTR', () => {
-    expect(FONT_CONFIG.rtl.fontSize).toBeGreaterThan(FONT_CONFIG.ltr.fontSize);
+  it('RTL and LTR use standard 12pt screenplay font size', () => {
+    expect(FONT_CONFIG.rtl.fontSize).toBe(12);
+    expect(FONT_CONFIG.ltr.fontSize).toBe(12);
   });
 
   it('RTL has greater lineHeight than LTR', () => {

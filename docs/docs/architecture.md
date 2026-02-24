@@ -40,6 +40,7 @@ The core package. Converts `.hekaya` plain text into a structured token stream.
 - `character-registry.ts` — Tracks character names; enables auto-detection after first `@` introduction
 - `bidi.ts` — Bidirectional text utilities (direction detection, Unicode markers)
 - `inline-lexer.ts` — Inline formatting (bold, italic, underline)
+- `serializer.ts` — Converts token stream back to Fountain/Hekaya plain text (round-trip support)
 - `hekaya.ts` — Public API class
 
 **Design constraints:**
