@@ -1,15 +1,6 @@
 ---
 name: hekaya-screenwriting-syntax
 description: Hekaya screenplay markup syntax for Arabic/RTL screenwriting. Use when writing, formatting, or converting screenplays in Arabic using .hekaya files, or when the user asks about Hekaya syntax, character names, scene headings, transitions, or dialogue formatting.
-version: 1.0.0
-author: Cairo Indie Filmmakers Club
-tags:
-  - screenwriting
-  - arabic
-  - rtl
-  - fountain
-  - hekaya
-  - markup
 ---
 
 # Hekaya Screenwriting Syntax
