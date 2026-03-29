@@ -4,6 +4,7 @@
 
 [![CI](https://github.com/michaelkmalak/hekaya/actions/workflows/ci.yml/badge.svg)](https://github.com/michaelkmalak/hekaya/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/michaelkmalak/hekaya)](https://github.com/michaelkmalak/hekaya/releases)
+[![npm](https://img.shields.io/npm/v/@hekaya/parser)](https://www.npmjs.com/package/@hekaya/parser)
 [![codecov](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY)](https://codecov.io/github/MichaelKMalak/hekaya)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -47,17 +48,24 @@ Hekaya is to Egyptian and Arabic-speaking screenwriters what Fountain is to Engl
 | `@hekaya/pdf`      | PDF generator with proper font support      | [![pdf](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=pdf)](https://codecov.io/github/MichaelKMalak/hekaya)           |
 | `@hekaya/cli`      | Command-line tool                           | [![cli](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=cli)](https://codecov.io/github/MichaelKMalak/hekaya)           |
 
-## Try It
+## Install
 
-Download a pre-built binary from the [Releases page](https://github.com/michaelkmalak/hekaya/releases) — no installation needed, just [Node.js](https://nodejs.org/) 20+:
+```bash
+# Install the CLI globally
+npm install -g @hekaya/cli
+
+# Or use individual packages
+npm install @hekaya/parser
+npm install @hekaya/renderer
+npm install @hekaya/pdf
+```
+
+Or download a pre-built binary from the [Releases page](https://github.com/michaelkmalak/hekaya/releases) — no installation needed, just [Node.js](https://nodejs.org/) 20+:
 
 ```bash
 # Download the binary for your platform (example: macOS ARM)
-curl -LO https://github.com/michaelkmalak/hekaya/releases/latest/download/hekaya-macos-arm64.cjs
-
-# Run it
-node hekaya-macos-arm64.cjs render script.hekaya -o script.html
-node hekaya-macos-arm64.cjs export script.hekaya -o script.pdf
+curl -LO https://github.com/michaelkmalak/hekaya/releases/latest/download/hekaya-macos-arm64.tar.gz
+tar -xzf hekaya-macos-arm64.tar.gz
 ```
 
 Or build from source:
@@ -111,7 +119,7 @@ Full sample screenplays are available on the [documentation site](https://michae
 To establish `.hekaya` as a recognized file extension:
 
 - [ ] **VS Code Extension** — Create a VS Code language extension providing syntax highlighting, snippets, and autocomplete for `.hekaya` files
-- [ ] **npm Packages** — Publish `@hekaya/parser`, `@hekaya/renderer`, `@hekaya/pdf`, `@hekaya/cli` to npm
+- [x] **npm Packages** — Publish `@hekaya/parser`, `@hekaya/renderer`, `@hekaya/pdf`, `@hekaya/cli` to npm
 - [ ] **GitHub Linguist** — Submit a PR to [github-linguist](https://github.com/github/linguist) to add `.hekaya` as a recognized language for syntax highlighting on GitHub
 - [ ] **IANA Media Type** — Register `text/x-hekaya` as a media type via [IANA](https://www.iana.org/form/media-types)
 - [ ] **Domain & Website** — Launch hekaya.com with documentation, playground, and download links

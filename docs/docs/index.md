@@ -43,18 +43,24 @@ Hekaya fills this gap with:
 - قطع -
 ```
 
-## Try It
+## Install
 
-Download a pre-built binary from the [Releases page](https://github.com/michaelkmalak/hekaya/releases) — no installation needed, just [Node.js](https://nodejs.org/) 20+. Fonts for PDF export are bundled — no extra downloads required.
+```bash
+# Install the CLI globally
+npm install -g @hekaya/cli
+
+# Or use individual packages
+npm install @hekaya/parser
+npm install @hekaya/renderer
+npm install @hekaya/pdf
+```
+
+Or download a pre-built binary from the [Releases page](https://github.com/michaelkmalak/hekaya/releases) — no installation needed, just [Node.js](https://nodejs.org/) 20+. Fonts for PDF export are bundled — no extra downloads required.
 
 ```bash
 # Download and extract for your platform (example: macOS ARM)
 curl -LO https://github.com/michaelkmalak/hekaya/releases/latest/download/hekaya-macos-arm64.tar.gz
 tar -xzf hekaya-macos-arm64.tar.gz
-
-# Run it
-node hekaya.cjs render script.hekaya -o script.html
-node hekaya.cjs export script.hekaya -o script.pdf
 ```
 
 Or build from source:
@@ -89,7 +95,7 @@ node apps/hekaya-cli/dist/index.js render script.hekaya -o script.html
 To establish `.hekaya` as a recognized file extension:
 
 - [ ] **VS Code Extension** — Create a language extension with syntax highlighting, snippets, and autocomplete
-- [ ] **npm Packages** — Publish `@hekaya/parser`, `@hekaya/renderer`, `@hekaya/pdf`, `@hekaya/cli`
+- [x] **npm Packages** — Publish `@hekaya/parser`, `@hekaya/renderer`, `@hekaya/pdf`, `@hekaya/cli`
 - [ ] **GitHub Linguist** — Add `.hekaya` to [github-linguist](https://github.com/github/linguist) for GitHub syntax highlighting
 - [ ] **IANA Media Type** — Register `text/x-hekaya` via [IANA](https://www.iana.org/form/media-types)
 - [ ] **Domain & Website** — Launch hekaya.com with documentation and playground

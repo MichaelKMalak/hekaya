@@ -6,6 +6,7 @@
 
 [![CI](https://github.com/michaelkmalak/hekaya/actions/workflows/ci.yml/badge.svg)](https://github.com/michaelkmalak/hekaya/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/michaelkmalak/hekaya)](https://github.com/michaelkmalak/hekaya/releases)
+[![npm](https://img.shields.io/npm/v/@hekaya/parser)](https://www.npmjs.com/package/@hekaya/parser)
 [![codecov](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY)](https://codecov.io/github/MichaelKMalak/hekaya)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -49,17 +50,24 @@
 | `@hekaya/pdf`      | مُولّد PDF بخطوط عربية                   | [![pdf](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=pdf)](https://codecov.io/github/MichaelKMalak/hekaya)           |
 | `@hekaya/cli`      | أداة سطر الأوامر                         | [![cli](https://codecov.io/github/MichaelKMalak/hekaya/graph/badge.svg?token=N3MGEDYDKY&flag=cli)](https://codecov.io/github/MichaelKMalak/hekaya)           |
 
-## جربها
+## التثبيت
 
-حمّل الملف التنفيذي من [صفحة الإصدارات](https://github.com/michaelkmalak/hekaya/releases) — محتاج بس [Node.js](https://nodejs.org/) نسخة 20 أو أعلى:
+```bash
+# تثبيت أداة سطر الأوامر
+npm install -g @hekaya/cli
+
+# أو استخدم الحزم منفردة
+npm install @hekaya/parser
+npm install @hekaya/renderer
+npm install @hekaya/pdf
+```
+
+أو حمّل الملف التنفيذي من [صفحة الإصدارات](https://github.com/michaelkmalak/hekaya/releases) — محتاج بس [Node.js](https://nodejs.org/) نسخة 20 أو أعلى:
 
 ```bash
 # حمّل الملف حسب نظامك (مثال: macOS ARM)
-curl -LO https://github.com/michaelkmalak/hekaya/releases/latest/download/hekaya-macos-arm64.cjs
-
-# شغّله
-node hekaya-macos-arm64.cjs render script.hekaya -o script.html
-node hekaya-macos-arm64.cjs export script.hekaya -o script.pdf
+curl -LO https://github.com/michaelkmalak/hekaya/releases/latest/download/hekaya-macos-arm64.tar.gz
+tar -xzf hekaya-macos-arm64.tar.gz
 ```
 
 أو ابنيها من الكود:
@@ -113,7 +121,7 @@ hekaya convert script.hekaya -o script.fountain
 لتأسيس `.hekaya` كامتداد ملفات معترف به:
 
 - [ ] **إضافة VS Code** — إنشاء إضافة لتوفير تلوين الكود والإكمال التلقائي لملفات `.hekaya`
-- [ ] **حزم npm** — نشر `@hekaya/parser` و`@hekaya/renderer` و`@hekaya/pdf` و`@hekaya/cli` على npm
+- [x] **حزم npm** — نشر `@hekaya/parser` و`@hekaya/renderer` و`@hekaya/pdf` و`@hekaya/cli` على npm
 - [ ] **GitHub Linguist** — إضافة `.hekaya` كلغة معترف بها على GitHub
 - [ ] **نوع IANA** — تسجيل `text/x-hekaya` كنوع وسائط
 - [ ] **الدومين والموقع** — إطلاق hekaya.com بالتوثيق والأمثلة
