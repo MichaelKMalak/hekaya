@@ -245,6 +245,26 @@ Hello there.`);
     });
   });
 
+  describe('include notes', () => {
+    it('excludes notes by default', async () => {
+      const script = Hekaya.parse(`\nداخلي - قهوة - نهار\n\n[[ملاحظة للمخرج]]`, {
+        includeNotes: true,
+      });
+      const withNotes = await generatePdf(script, { includeNotes: true });
+      const withoutNotes = await generatePdf(script, { includeNotes: false });
+      expect(withNotes.length).toBeGreaterThan(withoutNotes.length);
+    });
+
+    it('renders note tokens in PDF when includeNotes is true', async () => {
+      const script = Hekaya.parse(`\nداخلي - قهوة - نهار\n\n[[لقطة قريبة على وش سمير]]`, {
+        includeNotes: true,
+      });
+      const pdf = await generatePdf(script, { includeNotes: true });
+      expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
+      expect(pdf.length).toBeGreaterThan(1000);
+    });
+  });
+
   describe('dual dialogue', () => {
     it('generates PDF with dual dialogue blocks', async () => {
       const script = Hekaya.parse(`\n@سمير\nأنا هنا.\n\n@نادية ^\nأنا كمان.`);

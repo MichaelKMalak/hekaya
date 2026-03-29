@@ -25,6 +25,7 @@ const DEFAULT_OPTIONS: Required<ParseOptions> = {
   enableCharacterRegistry: true,
   strictMode: false,
   language: 'auto',
+  includeNotes: false,
 };
 
 /**
@@ -43,10 +44,10 @@ export function parse(input: string, options?: ParseOptions): HekayaScript {
     return '';
   });
 
-  // Extract inline notes (replace with empty string for tokenization)
+  // Extract inline notes (replace with empty string for tokenization, unless includeNotes)
   preprocessed = preprocessed.replace(rules.NOTE, (_match, content) => {
     notes.push(content);
-    return '';
+    return opts.includeNotes ? `[[${content}]]` : '';
   });
 
   // Normalize line endings
@@ -67,9 +68,12 @@ export function parse(input: string, options?: ParseOptions): HekayaScript {
   const registry = new CharacterRegistry();
   const tokens = tokenize(bodyText, registry, opts);
 
+  // --- Post-pass: Extract inline notes as separate tokens ---
+  const finalTokens = opts.includeNotes ? extractNoteTokens(tokens) : tokens;
+
   return {
     titleEntries,
-    tokens,
+    tokens: finalTokens,
     characters: registry.getAll(),
     notes,
     boneyards,
@@ -518,4 +522,67 @@ function findNextNonBlankLine(lines: string[], startIndex: number): number | nul
     }
   }
   return null;
+}
+
+/**
+ * Extract [[inline notes]] from token text and emit separate note_inline tokens.
+ * If a token's text contains [[note]], the note is split out as its own token
+ * inserted after the parent token. If the entire text is a note, the token
+ * is replaced with a note_inline token.
+ */
+function extractNoteTokens(tokens: HekayaToken[]): HekayaToken[] {
+  const result: HekayaToken[] = [];
+
+  for (const token of tokens) {
+    if (token.type === 'blank' || token.type === 'page_break') {
+      result.push(token);
+      continue;
+    }
+
+    // Check if text contains [[...]]
+    if (!token.text.includes('[[')) {
+      result.push(token);
+      continue;
+    }
+
+    // If the entire trimmed text is a single note, emit as note_inline
+    const fullNoteMatch = token.text.trim().match(/^\[\[(.+)\]\]$/su);
+    if (fullNoteMatch) {
+      result.push({
+        type: 'note_inline',
+        text: fullNoteMatch[1].trim(),
+        direction: token.direction,
+      });
+      continue;
+    }
+
+    // Split text around [[...]] patterns
+    const parts = token.text.split(/(\[\[[^\]]+\]\])/gu);
+    let hasNonNotePart = false;
+
+    for (const part of parts) {
+      const trimmed = part.trim();
+      if (!trimmed) continue;
+
+      const noteMatch = trimmed.match(/^\[\[(.+)\]\]$/su);
+      if (noteMatch) {
+        // If there was non-note text before, it's already been pushed
+        result.push({
+          type: 'note_inline',
+          text: noteMatch[1].trim(),
+          direction: token.direction,
+        });
+      } else {
+        // Non-note text — keep as original token type
+        if (!hasNonNotePart) {
+          result.push({ ...token, text: trimmed });
+          hasNonNotePart = true;
+        } else {
+          result.push({ ...token, text: trimmed });
+        }
+      }
+    }
+  }
+
+  return result;
 }

@@ -356,11 +356,19 @@ Equals prefix for brief summaries (not rendered in output):
 
 ## Notes
 
-Double brackets for inline notes (not rendered in output):
+Double brackets for inline notes (stripped from output by default):
 
 ```
 سمير بيمشي [[لازم نصور المشهد ده في وسط البلد]] في الشارع.
 ```
+
+To include notes in PDF output, use the `--include-notes` flag:
+
+```bash
+hekaya export script.hekaya --include-notes -o script.pdf
+```
+
+Notes render in italic gray text with brackets to distinguish them from screenplay content. Useful for working drafts with directorial cues or visual references.
 
 ---
 

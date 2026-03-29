@@ -89,4 +89,6 @@ export interface ParseOptions {
   strictMode?: boolean;
   /** Language hint for keyword detection (default: 'auto') */
   language?: 'ar' | 'en' | 'auto';
+  /** Keep inline notes as tokens instead of stripping them (default: false) */
+  includeNotes?: boolean;
 }

@@ -364,6 +364,38 @@ One coffee.`;
       expect(script.boneyards).toHaveLength(1);
       expect(script.boneyards[0]).toBe('محذوف');
     });
+
+    it('emits note_inline tokens when includeNotes is true', () => {
+      const input = `\n[[ملاحظة للمخرج: لقطة قريبة]]`;
+      const script = parse(input, { includeNotes: true });
+      const note = script.tokens.find((t) => t.type === 'note_inline');
+      expect(note).toBeDefined();
+      expect(note!.text).toBe('ملاحظة للمخرج: لقطة قريبة');
+    });
+
+    it('strips notes from tokens when includeNotes is false', () => {
+      const input = `\nسمير يمشي [[ملاحظة هنا]] في الشارع.`;
+      const script = parse(input, { includeNotes: false });
+      const note = script.tokens.find((t) => t.type === 'note_inline');
+      expect(note).toBeUndefined();
+      expect(script.notes).toHaveLength(1);
+    });
+
+    it('splits mixed text and notes into separate tokens', () => {
+      const input = `\nسمير يمشي [[ملاحظة]] في الشارع.`;
+      const script = parse(input, { includeNotes: true });
+      const noteTokens = script.tokens.filter((t) => t.type === 'note_inline');
+      const actionTokens = script.tokens.filter((t) => t.type === 'action');
+      expect(noteTokens).toHaveLength(1);
+      expect(noteTokens[0].text).toBe('ملاحظة');
+      expect(actionTokens.length).toBeGreaterThanOrEqual(1);
+    });
+
+    it('still populates notes array when includeNotes is true', () => {
+      const input = `\n[[ملاحظة أولى]] [[ملاحظة ثانية]]`;
+      const script = parse(input, { includeNotes: true });
+      expect(script.notes).toHaveLength(2);
+    });
   });
 
   describe('edge cases', () => {

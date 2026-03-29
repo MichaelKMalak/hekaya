@@ -29,6 +29,8 @@ export interface PdfOptions {
   includeTitlePage?: boolean;
   /** Include section/synopsis elements (default: false) */
   includeMetaElements?: boolean;
+  /** Include inline notes in output (default: false) */
+  includeNotes?: boolean;
   /** Custom fonts directory */
   fontsDir?: string;
 }
@@ -36,6 +38,7 @@ export interface PdfOptions {
 const DEFAULT_OPTIONS: Required<PdfOptions> = {
   includeTitlePage: true,
   includeMetaElements: false,
+  includeNotes: false,
   fontsDir: '',
 };
 
@@ -310,6 +313,12 @@ function buildBody(
       continue;
     }
 
+    // Skip notes unless requested
+    if (!opts.includeNotes && token.type === 'note_inline') {
+      i++;
+      continue;
+    }
+
     // Handle dual dialogue
     if (token.type === 'character') {
       const dialogueEnd = findDialogueEnd(tokens, i + 1);
@@ -447,6 +456,12 @@ function buildToken(
 
     case 'lyrics':
       return applyLayout({ text: formatInlineText(token.text), italics: true }, layouts.lyrics);
+
+    case 'note_inline':
+      return applyLayout(
+        { text: `[${token.text}]`, italics: true, color: '#666666', fontSize: 10 },
+        layouts.note_inline || layouts.action,
+      );
 
     default:
       return null;

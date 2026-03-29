@@ -142,6 +142,15 @@ export function getElementLayouts(dir: 'rtl' | 'ltr'): Record<string, ElementLay
       alignment: isRtl ? 'right' : 'left',
       marginBottom: 6,
     },
+
+    note_inline: {
+      marginLeft: 0,
+      marginRight: 0,
+      alignment: isRtl ? 'right' : 'left',
+      fontSize: 10,
+      marginTop: 4,
+      marginBottom: 4,
+    },
   };
 }
 

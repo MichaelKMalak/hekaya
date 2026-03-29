@@ -11,25 +11,32 @@ export const exportCommand = new Command('export')
   .option('-o, --output <file>', 'Output PDF file (default: <input>.pdf)')
   .option('--no-title-page', 'Exclude title page')
   .option('--meta', 'Include section/synopsis elements', false)
-  .action(async (file: string, options: { output?: string; titlePage: boolean; meta: boolean }) => {
-    try {
-      const input = readFileSync(file, 'utf-8');
-      const script = Hekaya.parse(input);
+  .option('--include-notes', 'Include inline notes [[...]] in PDF output', false)
+  .action(
+    async (
+      file: string,
+      options: { output?: string; titlePage: boolean; meta: boolean; includeNotes: boolean },
+    ) => {
+      try {
+        const input = readFileSync(file, 'utf-8');
+        const script = Hekaya.parse(input, { includeNotes: options.includeNotes });
 
-      const pdfBuffer = await generatePdf(script, {
-        includeTitlePage: options.titlePage,
-        includeMetaElements: options.meta,
-      });
+        const pdfBuffer = await generatePdf(script, {
+          includeTitlePage: options.titlePage,
+          includeMetaElements: options.meta,
+          includeNotes: options.includeNotes,
+        });
 
-      const outputPath = options.output || file.replace(/\.(hekaya|fountain)$/, '.pdf');
-      writeFileSync(outputPath, pdfBuffer);
-      console.log(
-        chalk.green(
-          `Exported ${file} → ${outputPath} (${(pdfBuffer.length / 1024).toFixed(1)} KB)`,
-        ),
-      );
-    } catch (err) {
-      console.error(chalk.red(`Error exporting ${file}:`), getErrorMessage(err));
-      process.exit(1);
-    }
-  });
+        const outputPath = options.output || file.replace(/\.(hekaya|fountain)$/, '.pdf');
+        writeFileSync(outputPath, pdfBuffer);
+        console.log(
+          chalk.green(
+            `Exported ${file} → ${outputPath} (${(pdfBuffer.length / 1024).toFixed(1)} KB)`,
+          ),
+        );
+      } catch (err) {
+        console.error(chalk.red(`Error exporting ${file}:`), getErrorMessage(err));
+        process.exit(1);
+      }
+    },
+  );
