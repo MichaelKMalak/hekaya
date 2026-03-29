@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.3.0](https://github.com/MichaelKMalak/hekaya/compare/v1.2.0...v1.3.0) (2026-03-29)
+
+
+### Features
+
+* add PDF RTL rendering, serializer, and convert command ([dbe71d4](https://github.com/MichaelKMalak/hekaya/commit/dbe71d4b066f76e7f27b068a376c9267b039db7c))
+* add Try It section and fix release binary build ([1da68c3](https://github.com/MichaelKMalak/hekaya/commit/1da68c30c7d17584f7f9a6c82871b15b6d23e01e))
+* align terminology with Egyptian film industry standards ([64afe66](https://github.com/MichaelKMalak/hekaya/commit/64afe667476c731db77213a4c351b7d6e068b2cd))
+
+
+### Bug Fixes
+
+* **pdf:** handle import.meta.url fallback for CJS bundling ([8928e85](https://github.com/MichaelKMalak/hekaya/commit/8928e853f074891f713b1a300d04819c8cd123f3))
+* **pdf:** update font download script for Cascadia Mono ([b53352a](https://github.com/MichaelKMalak/hekaya/commit/b53352a50b201075ecfa4102acdd852483956afc))
+
 ## [1.2.0](https://github.com/MichaelKMalak/hekaya/compare/v1.1.0...v1.2.0) (2026-02-23)
 
 
