@@ -1,0 +1,35 @@
+name: CI (Release PR)
+
+# Runs CI on release-please PRs. The default GITHUB_TOKEN cannot trigger
+# workflows via push events, so release-please branches never get status
+# checks. This workflow uses pull_request_target to run on the PR itself,
+# which is triggered by GitHub (not the bot token) and reports status checks.
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  test:
+    if: startsWith(github.head_ref, 'release-please--')
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm format:check
+      - run: pnpm build
+      - name: Download PDF fonts
+        run: pnpm --filter @hekaya/pdf fonts
+      - run: pnpm test
