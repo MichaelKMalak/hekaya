@@ -358,6 +358,19 @@ npm install -g @hekaya/cli    # CLI tool
 >النهاية<
 ```
 
+## Supporting Files
+
+- **[أمثلة](examples.md)** — Full conversations, element input/output pairs, Fountain→Hekaya conversion, common mistakes, CLI examples, complete screenplay
+- **[مرجع كامل](reference.md)** — Complete keyword lists, element detection priority, Character Registry behavior, force prefixes, CLI commands, npm packages
+- **قوالب (Templates):**
+  - [short-film.hekaya](templates/short-film.hekaya) — Full short film template with 3-act structure
+  - [scene.hekaya](templates/scene.hekaya) — Single scene template
+  - [dual-dialogue.hekaya](templates/dual-dialogue.hekaya) — Dual dialogue template
+  - [title-page.hekaya](templates/title-page.hekaya) — Complete title page with all Arabic keys
+- **أدوات (Scripts):**
+  - `scripts/new-screenplay.sh` — Create a new .hekaya file from template
+  - `scripts/validate-and-export.sh` — Validate and export to PDF in one step
+
 ## Notes
 
 - Arabic has no uppercase — use `@` prefix for character names and **bold** for emphasis

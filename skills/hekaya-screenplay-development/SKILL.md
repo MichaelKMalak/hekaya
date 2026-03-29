@@ -897,6 +897,19 @@ npx @hekaya/cli export script.hekaya --include-notes
 
 ---
 
+## ملفات مساعدة
+
+- **[أمثلة محادثات](examples.md)** — محادثات كاملة، before/after للحوار والشخصيات، تحليل script doctor، استراتيجية مهرجانات
+- **[مرجع سريع](reference.md)** — جداول ملخصة لكل الأُطر النفسية وحِرَف السيناريو والتصنيفات الخمسة
+- **قوالب:**
+  - [بطاقة شخصية](templates/character-card.md) — قالب شامل لبناء شخصية بالأُطر النفسية
+  - [ورقة عمل اللوجلاين](templates/logline-worksheet.md) — من الفكرة للوجلاين خطوة بخطوة
+  - [مخطط فيلم قصير](templates/short-film-outline.md) — بنية ثلاث فصول مع كل العناصر
+  - [تحليل مشهد](templates/scene-analysis.md) — قالب لتحليل وتقييم مشهد موجود
+- **أدوات:**
+  - `scripts/story-spine.sh` — مولّد تفاعلي للعمود الفقري (Story Spine) بالمصري
+  - `scripts/idea-generator.sh` — مولّد أفكار أفلام قصيرة عشوائي بالتصنيفات الخمسة
+
 ## مصادر
 
 - [Story - Robert McKee](https://mckeestory.com/)
