@@ -8,9 +8,9 @@ import {
 } from '../src/page-layout';
 
 describe('PAGE_SIZE', () => {
-  it('is US Letter size in points (8.5" x 11")', () => {
-    expect(PAGE_SIZE.width).toBe(612); // 8.5 * 72
-    expect(PAGE_SIZE.height).toBe(792); // 11 * 72
+  it('is A4 size in points (210mm x 297mm)', () => {
+    expect(PAGE_SIZE.width).toBe(595.28);
+    expect(PAGE_SIZE.height).toBe(841.89);
   });
 });
 

@@ -12,10 +12,10 @@
 
 const INCH = 72; // 1 inch = 72 PDF points
 
-/** US Letter page size in points. */
+/** A4 page size in points. */
 export const PAGE_SIZE = {
-  width: 8.5 * INCH, // 612
-  height: 11 * INCH, // 792
+  width: 595.28, // 210mm
+  height: 841.89, // 297mm
 };
 
 /**
@@ -97,7 +97,7 @@ export function getElementLayouts(dir: 'rtl' | 'ltr'): Record<string, ElementLay
     },
 
     parenthetical: {
-      ...bothIndent(1.5, 2.0),
+      ...bothIndent(1.0, 1.5),
       alignment: 'center',
       marginBottom: 0,
     },
