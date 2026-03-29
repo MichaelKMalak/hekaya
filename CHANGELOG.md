@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/MichaelKMalak/hekaya/compare/v1.4.1...v1.4.2) (2026-03-29)
+
+
+### Bug Fixes
+
+* use A4 page size and widen parenthetical margins ([035ec5a](https://github.com/MichaelKMalak/hekaya/commit/035ec5ac4a1b4eaf05724b336a2e3832211b91d2))
+
 ## [1.4.1](https://github.com/MichaelKMalak/hekaya/compare/v1.4.0...v1.4.1) (2026-03-29)
 
 
