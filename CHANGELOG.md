@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/MichaelKMalak/hekaya/compare/v1.3.0...v1.4.0) (2026-03-29)
+
+
+### Features
+
+* add npm publish automation and install docs ([4a8ad7c](https://github.com/MichaelKMalak/hekaya/commit/4a8ad7c422f9474d6e955ecd80d3c66c05462ae9))
+* bundle fonts with hekaya-pdf npm package ([7f9d867](https://github.com/MichaelKMalak/hekaya/commit/7f9d867d4280390e323d37d64671320ba0a777c4))
+
+
+### Bug Fixes
+
+* add CI workflow for release-please PRs ([2ea4dce](https://github.com/MichaelKMalak/hekaya/commit/2ea4dce0f1c7d1094df5509ca9c0b45fe868c9a0))
+
 ## [1.3.0](https://github.com/MichaelKMalak/hekaya/compare/v1.2.0...v1.3.0) (2026-03-29)
 
 
