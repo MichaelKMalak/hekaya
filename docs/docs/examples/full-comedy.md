@@ -11,7 +11,7 @@ A complete satirical comedy written in Egyptian Arabic. A tale of misinformation
 
 ```
 العنوان: بكرا السما ح تقع
-المؤلف: مايقل
+سيناريو: مايقل
 مسودة: المسودة الأولى
 تاريخ: ٢٠٢٦/٢/٢٣
 تواصل: michael@example.com
@@ -142,7 +142,7 @@ A complete satirical comedy written in Egyptian Arabic. A tale of misinformation
 
 ## Elements Used
 
-- **Title page** with Arabic keys (`العنوان`, `المؤلف`, `مسودة`, `تاريخ`, `تواصل`)
+- **Title page** with Arabic keys (`العنوان`, `سيناريو`, `مسودة`, `تاريخ`, `تواصل`)
 - **Scene headings** using Arabic keywords (`داخلي`, `خارجي`)
 - **7 characters**: مايكل، القهوجي، السواق، الدكتور، المحامي، الفلاح، المكوجي
 - **5 scene locations**: قهوة بلدي، شارع شعبي، عربية السواق، قهوة وسط البلد، ميدان التحرير

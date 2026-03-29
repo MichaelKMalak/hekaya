@@ -11,7 +11,7 @@ A minimal Hekaya screenplay demonstrating core elements in Egyptian Arabic.
 
 ```
 العنوان: صباح الخير يا مصر
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 
 داخلي - قهوة بلدي - صباح
 

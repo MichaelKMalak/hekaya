@@ -28,7 +28,7 @@ Key-value pairs at the beginning of the file, separated from the script body by 
 
 ```
 العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 مسودة: المسودة الأولى
 تاريخ: ٢٠٢٦/٢/٢٣
 تواصل: samir@example.com
@@ -36,23 +36,26 @@ Key-value pairs at the beginning of the file, separated from the script body by 
 
 ### Key Mappings
 
-| Arabic Key | English Key | Purpose           |
-| ---------- | ----------- | ----------------- |
-| العنوان    | Title       | Script title      |
-| المؤلف     | Author      | Author name       |
-| المؤلفون   | Authors     | Multiple authors  |
-| المصدر     | Source      | Source material   |
-| مسودة      | Draft date  | Draft information |
-| تاريخ      | Date        | Date              |
-| تواصل      | Contact     | Contact info      |
-| حقوق       | Copyright   | Copyright notice  |
-| ملاحظات    | Notes       | Notes             |
-| ائتمان     | Credit      | Credit line       |
+| Arabic Key     | English Key | Purpose           |
+| -------------- | ----------- | ----------------- |
+| العنوان        | Title       | Script title      |
+| سيناريو        | Author      | Author name       |
+| كتابة          | Author      | Author name       |
+| تأليف          | Author      | Author name       |
+| المصدر         | Source      | Source material   |
+| مسودة          | Draft       | Draft information |
+| تاريخ المسودة  | Draft date  | Draft date        |
+| تاريخ          | Date        | Date              |
+| التاريخ        | Date        | Date              |
+| تواصل          | Contact     | Contact info      |
+| بيانات الاتصال | Contact     | Contact info      |
+| حقوق النشر     | Copyright   | Copyright notice  |
+| ملاحظات        | Notes       | Notes             |
 
 Multi-line values indent with spaces or tabs:
 
 ```
-المؤلف:
+سيناريو:
     سمير عبدالحميد
     ونادية حسن
 ```
@@ -65,14 +68,14 @@ Lines beginning with Arabic or English scene heading keywords.
 
 ### Arabic Keywords
 
-| Arabic      | English Equivalent | Meaning           |
-| ----------- | ------------------ | ----------------- |
-| داخلي       | INT                | Interior          |
-| خارجي       | EXT                | Exterior          |
-| تأسيس       | EST                | Establishing      |
-| داخلي/خارجي | INT/EXT            | Interior/Exterior |
-| خارجي/داخلي | EXT/INT            | Exterior/Interior |
-| د/خ         | I/E                | Abbreviation      |
+| Arabic       | English Equivalent | Meaning           |
+| ------------ | ------------------ | ----------------- |
+| داخلي        | INT                | Interior          |
+| خارجي        | EXT                | Exterior          |
+| لقطة تأسيسية | EST                | Establishing      |
+| داخلي/خارجي  | INT/EXT            | Interior/Exterior |
+| خارجي/داخلي  | EXT/INT            | Exterior/Interior |
+| د/خ          | I/E                | Abbreviation      |
 
 ### Syntax
 
@@ -140,18 +143,21 @@ The second "سمير" is auto-detected because it was previously registered.
 Parenthetical extensions after the name:
 
 ```
-@سمير (صوت خارجي)
+@سمير (صوت من خارج المشهد)
 أنا مش هنا.
 
 @نادية (خارج الشاشة)
 بس أنا سامعاك.
 ```
 
-| Arabic | English | Meaning                  |
-| ------ | ------- | ------------------------ |
-| ص.خ    | V.O.    | Voice over (صوت خارجي)   |
-| خ.ش    | O.S.    | Off screen (خارج الشاشة) |
-| تابع   | CONT'D  | Continued                |
+| Arabic             | English | Meaning                         |
+| ------------------ | ------- | ------------------------------- |
+| صوت من خارج المشهد | V.O.    | Voice over (صوت من خارج المشهد) |
+| ص.خ                | V.O.    | Voice over (abbreviation)       |
+| خارج الشاشة        | O.S.    | Off screen (خارج الشاشة)        |
+| خ.ش                | O.S.    | Off screen (abbreviation)       |
+| خارج الكادر        | O.C.    | Off camera (خارج الكادر)        |
+| تابع               | CONT'D  | Continued                       |
 
 ### English Character Names
 
@@ -254,6 +260,24 @@ All keywords were sourced from real production Egyptian screenplays (الشيخ 
 | عودة للمشهد    | BACK TO SCENE      | Back to scene                      |
 | تلاشي إلى أسود | FADE TO BLACK      | Fade to black                      |
 | تلاشي إلى      | FADE TO            | Fade to                            |
+| قطع مباشر      | CUT TO             | Cut to (direct)                    |
+| قطع قافز       | JUMP CUT TO        | Jump cut                           |
+| قطع خاطف       | FLASH CUT          | Flash cut                          |
+| تلاشي          | FADE OUT           | Fade out                           |
+| تلاشي إلى أبيض | FADE TO WHITE      | Fade to white                      |
+| مسح            | WIPE TO            | Wipe                               |
+| مسح إلى        | WIPE TO            | Wipe to                            |
+| وميض           | FLASH TO           | Flash                              |
+| وميض إلى       | FLASH TO           | Flash to                           |
+| قزحية دخول     | IRIS IN            | Iris in                            |
+| قزحية خروج     | IRIS OUT           | Iris out                           |
+| تداخل مع       | INTERCUT WITH      | Intercut                           |
+| تجميد الكادر   | FREEZE FRAME       | Freeze frame                       |
+| شاشة منقسمة    | SPLIT SCREEN       | Split screen                       |
+| مزج متطابق     | MATCH DISSOLVE     | Match dissolve                     |
+| تحول تدريجي    | MORPH CUT          | Morph cut                          |
+| انتقال         | TRANSITION         | Transition                         |
+| عودة إلى       | BACK TO            | Back to                            |
 
 ### Forced Transition
 
@@ -376,12 +400,6 @@ The parser detects base direction from content:
 Set in title page:
 
 ```
-اتجاه: يمين-لليسار
-```
-
-or
-
-```
 Direction: rtl
 ```
 
@@ -395,7 +413,7 @@ Individual elements inherit base direction but can contain mixed-direction text.
 
 ```
 العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 مسودة: المسودة الأولى
 تاريخ: ٢٠٢٦/٢/٢٣
 

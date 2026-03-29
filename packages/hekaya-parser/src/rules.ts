@@ -42,7 +42,7 @@ export const CHARACTER_ENGLISH = /^([A-Z][A-Z0-9 _\-']+)(\s*\(.+\))?\s*\^?\s*$/;
 /** Dual dialogue marker: trailing caret. */
 export const DUAL_DIALOGUE = /\s*\^\s*$/;
 
-/** Character extension: parenthetical after name, e.g. (V.O.) or (صوت خارجي). */
+/** Character extension: parenthetical after name, e.g. (V.O.) or (صوت من خارج المشهد). */
 export const CHARACTER_EXTENSION = /\s*\(([^)]+)\)\s*$/u;
 
 // Build transition keyword pattern (sorted longest-first to avoid partial matches)

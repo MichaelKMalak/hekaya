@@ -32,11 +32,11 @@ These Fountain elements work exactly the same in Hekaya:
 | Feature                  | Fountain       | Hekaya                                         |
 | ------------------------ | -------------- | ---------------------------------------------- |
 | Arabic scene headings    | Not supported  | `داخلي`, `خارجي`, `مقدر`, `داخلي/خارجي`, `د/خ` |
-| Arabic title page keys   | Not supported  | `العنوان`, `المؤلف`, `مسودة`, etc.             |
+| Arabic title page keys   | Not supported  | `العنوان`, `سيناريو`, `مسودة`, etc.            |
 | Arabic transitions       | Not supported  | `قطع`, `- قطع -`, `اختفاء تدريجي`, etc.        |
 | Character Registry       | Not present    | Auto-detect names after first `@` introduction |
 | Arabic numerals          | Not supported  | `#١#` for scene numbers                        |
-| Text direction metadata  | Not present    | `اتجاه: يمين-لليسار` or `Direction: rtl`       |
+| Text direction metadata  | Not present    | `Direction: rtl`                               |
 | `.hekaya` file extension | Not recognized | Primary extension                              |
 
 ## Intentional Deviations

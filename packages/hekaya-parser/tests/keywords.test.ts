@@ -8,7 +8,6 @@ import {
   TRANSITION_MAP_AR_EN,
   CHARACTER_EXTENSIONS_AR,
   TIME_OF_DAY_AR,
-  DIRECTION_VALUES_AR,
 } from '../src/keywords';
 
 describe('SCENE_HEADING_KEYWORDS_AR', () => {
@@ -18,6 +17,10 @@ describe('SCENE_HEADING_KEYWORDS_AR', () => {
     expect(SCENE_HEADING_KEYWORDS_AR).toHaveProperty('خارجي');
     expect(SCENE_HEADING_KEYWORDS_AR['داخلي']).toBe('INT');
     expect(SCENE_HEADING_KEYWORDS_AR['خارجي']).toBe('EXT');
+  });
+
+  it('maps لقطة تأسيسية to EST', () => {
+    expect(SCENE_HEADING_KEYWORDS_AR['لقطة تأسيسية']).toBe('EST');
   });
 
   it('maps compound keywords correctly', () => {
@@ -42,9 +45,9 @@ describe('SCENE_HEADING_KEYWORDS_EN', () => {
 
 describe('TITLE_KEYS_AR', () => {
   it('contains essential title page keys', () => {
-    // Should have العنوان (title), المؤلف (author), مسودة (draft date)
+    // Should have العنوان (title), سيناريو (author), مسودة (draft)
     const keys = Object.keys(TITLE_KEYS_AR);
-    expect(keys.length).toBeGreaterThanOrEqual(8);
+    expect(keys.length).toBeGreaterThanOrEqual(10);
   });
 
   it('maps to normalized English keys', () => {
@@ -54,13 +57,34 @@ describe('TITLE_KEYS_AR', () => {
     }
   });
 
-  it('maps تأليف to credit', () => {
-    expect(TITLE_KEYS_AR['تأليف']).toBe('credit');
+  it('maps سيناريو, كتابة, and تأليف to author', () => {
+    expect(TITLE_KEYS_AR['سيناريو']).toBe('author');
+    expect(TITLE_KEYS_AR['كتابة']).toBe('author');
+    expect(TITLE_KEYS_AR['تأليف']).toBe('author');
   });
 
-  it('maps both ائتمان and تأليف to credit', () => {
-    expect(TITLE_KEYS_AR['ائتمان']).toBe('credit');
-    expect(TITLE_KEYS_AR['تأليف']).toBe('credit');
+  it('maps مسودة to draft (not draft date)', () => {
+    expect(TITLE_KEYS_AR['مسودة']).toBe('draft');
+  });
+
+  it('maps تاريخ المسودة to draft date', () => {
+    expect(TITLE_KEYS_AR['تاريخ المسودة']).toBe('draft date');
+  });
+
+  it('maps حقوق النشر to copyright', () => {
+    expect(TITLE_KEYS_AR['حقوق النشر']).toBe('copyright');
+  });
+
+  it('maps بيانات الاتصال to contact', () => {
+    expect(TITLE_KEYS_AR['بيانات الاتصال']).toBe('contact');
+  });
+
+  it('does not include المؤلف (replaced by سيناريو/كتابة/تأليف)', () => {
+    expect(TITLE_KEYS_AR['المؤلف']).toBeUndefined();
+  });
+
+  it('does not include اتجاه (direction removed from Arabic keys)', () => {
+    expect(TITLE_KEYS_AR['اتجاه']).toBeUndefined();
   });
 });
 
@@ -73,6 +97,10 @@ describe('TITLE_KEYS_EN', () => {
       expect(enValues).toContain(v);
     }
   });
+
+  it('keeps direction for English Direction: rtl support', () => {
+    expect(TITLE_KEYS_EN['direction']).toBe('direction');
+  });
 });
 
 describe('TRANSITION_KEYWORDS_AR', () => {
@@ -83,6 +111,25 @@ describe('TRANSITION_KEYWORDS_AR', () => {
   it('has no duplicates', () => {
     const unique = new Set(TRANSITION_KEYWORDS_AR);
     expect(unique.size).toBe(TRANSITION_KEYWORDS_AR.length);
+  });
+
+  it('contains core transitions', () => {
+    expect(TRANSITION_KEYWORDS_AR).toContain('قطع');
+    expect(TRANSITION_KEYWORDS_AR).toContain('قطع مفاجئ');
+    expect(TRANSITION_KEYWORDS_AR).toContain('تلاشي');
+    expect(TRANSITION_KEYWORDS_AR).toContain('اختفاء تدريجي');
+    expect(TRANSITION_KEYWORDS_AR).toContain('ظهور تدريجي');
+  });
+
+  it('contains expanded professional set', () => {
+    expect(TRANSITION_KEYWORDS_AR).toContain('قطع قافز');
+    expect(TRANSITION_KEYWORDS_AR).toContain('تداخل مع');
+    expect(TRANSITION_KEYWORDS_AR).toContain('تجميد الكادر');
+    expect(TRANSITION_KEYWORDS_AR).toContain('شاشة منقسمة');
+    expect(TRANSITION_KEYWORDS_AR).toContain('تلاشي إلى أبيض');
+    expect(TRANSITION_KEYWORDS_AR).toContain('مسح');
+    expect(TRANSITION_KEYWORDS_AR).toContain('وميض');
+    expect(TRANSITION_KEYWORDS_AR).toContain('انتقال');
   });
 });
 
@@ -108,6 +155,18 @@ describe('CHARACTER_EXTENSIONS_AR', () => {
     expect(values).toContain('O.S.');
   });
 
+  it('maps صوت من خارج المشهد to V.O.', () => {
+    expect(CHARACTER_EXTENSIONS_AR['صوت من خارج المشهد']).toBe('V.O.');
+  });
+
+  it('maps خارج الكادر to O.S.', () => {
+    expect(CHARACTER_EXTENSIONS_AR['خارج الكادر']).toBe('O.S.');
+  });
+
+  it('keeps خارج الشاشة as O.S. alternative', () => {
+    expect(CHARACTER_EXTENSIONS_AR['خارج الشاشة']).toBe('O.S.');
+  });
+
   it('is non-empty', () => {
     expect(Object.keys(CHARACTER_EXTENSIONS_AR).length).toBeGreaterThan(0);
   });
@@ -115,19 +174,17 @@ describe('CHARACTER_EXTENSIONS_AR', () => {
 
 describe('TIME_OF_DAY_AR', () => {
   it('contains common time-of-day terms', () => {
-    expect(TIME_OF_DAY_AR.length).toBeGreaterThanOrEqual(4);
+    expect(TIME_OF_DAY_AR.length).toBeGreaterThanOrEqual(8);
+  });
+
+  it('contains extended time-of-day terms', () => {
+    expect(TIME_OF_DAY_AR).toContain('منتصف الليل');
+    expect(TIME_OF_DAY_AR).toContain('قبل الفجر');
+    expect(TIME_OF_DAY_AR).toContain('بعد الغروب');
   });
 
   it('has no duplicates', () => {
     const unique = new Set(TIME_OF_DAY_AR);
     expect(unique.size).toBe(TIME_OF_DAY_AR.length);
-  });
-});
-
-describe('DIRECTION_VALUES_AR', () => {
-  it('maps RTL and LTR direction values', () => {
-    const values = Object.values(DIRECTION_VALUES_AR);
-    expect(values).toContain('rtl');
-    expect(values).toContain('ltr');
   });
 });

@@ -68,7 +68,7 @@ export class CharacterRegistry {
   /**
    * Normalize a character name for comparison:
    * 1. Trim whitespace
-   * 2. Remove character extensions like (V.O.) or (صوت خارجي)
+   * 2. Remove character extensions like (V.O.) or (صوت من خارج المشهد)
    * 3. Remove dual dialogue caret ^
    * 4. Strip Arabic diacritics (tashkeel)
    * 5. Normalize alef variants (أ إ آ ٱ → ا)

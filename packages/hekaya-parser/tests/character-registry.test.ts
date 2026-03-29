@@ -62,7 +62,7 @@ describe('CharacterRegistry', () => {
 
     it('strips extensions for comparison', () => {
       registry.register('سمير');
-      expect(registry.isKnown('سمير (صوت خارجي)')).toBe(true);
+      expect(registry.isKnown('سمير (صوت من خارج المشهد)')).toBe(true);
     });
 
     it('strips dual dialogue caret', () => {
@@ -88,7 +88,7 @@ describe('CharacterRegistry', () => {
 
     it('handles name with extension', () => {
       registry.register('نادية');
-      expect(registry.isCharacterLine('نادية (صوت خارجي)', true)).toBe(true);
+      expect(registry.isCharacterLine('نادية (صوت من خارج المشهد)', true)).toBe(true);
     });
   });
 
@@ -118,7 +118,7 @@ describe('CharacterRegistry', () => {
     });
 
     it('removes extensions', () => {
-      expect(registry.normalize('سمير (صوت خارجي)')).toBe('سمير');
+      expect(registry.normalize('سمير (صوت من خارج المشهد)')).toBe('سمير');
     });
 
     it('removes dual dialogue caret', () => {
@@ -134,7 +134,7 @@ describe('CharacterRegistry', () => {
     });
 
     it('handles combined normalization', () => {
-      expect(registry.normalize('  أَحمَد (صوت خارجي) ^  ')).toBe('احمد');
+      expect(registry.normalize('  أَحمَد (صوت من خارج المشهد) ^  ')).toBe('احمد');
     });
   });
 });

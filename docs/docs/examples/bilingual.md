@@ -11,7 +11,7 @@ A Hekaya screenplay demonstrating mixed Arabic and English content.
 
 ```
 العنوان: The Last Meeting
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 مسودة: First Draft
 
 داخلي - مكتب شركة أجنبية - نهار

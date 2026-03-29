@@ -5,7 +5,7 @@ describe('lexer - parse()', () => {
   describe('title page', () => {
     it('parses Arabic title page keys', () => {
       const input = `العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 مسودة: المسودة الأولى
 
 داخلي - قهوة - نهار`;
@@ -19,7 +19,7 @@ describe('lexer - parse()', () => {
       });
       expect(script.titleEntries[1]).toEqual({
         key: 'author',
-        keyOriginal: 'المؤلف',
+        keyOriginal: 'سيناريو',
         value: 'سمير عبدالحميد',
       });
     });
@@ -49,7 +49,7 @@ Author: سمير
     });
 
     it('handles multi-line values', () => {
-      const input = `المؤلف:
+      const input = `سيناريو:
     سمير عبدالحميد
     ونادية حسن
 
@@ -69,7 +69,7 @@ Author: سمير
     });
 
     it('parses explicit direction from title page', () => {
-      const input = `اتجاه: يمين-لليسار
+      const input = `Direction: rtl
 
 داخلي - قهوة - نهار`;
 
@@ -147,13 +147,13 @@ Author: سمير
     });
 
     it('parses character with extension', () => {
-      const input = `\n@نادية (صوت خارجي)
+      const input = `\n@نادية (صوت من خارج المشهد)
 ألو؟`;
 
       const script = parse(input);
       const character = script.tokens.find((t) => t.type === 'character');
       expect(character!.characterName).toBe('نادية');
-      expect(character!.characterExtension).toBe('صوت خارجي');
+      expect(character!.characterExtension).toBe('صوت من خارج المشهد');
     });
 
     it('parses dual dialogue', () => {
@@ -429,6 +429,29 @@ INT. HOUSE - DAY`;
 
       const script = parse(input);
       expect(script.direction).toBe('rtl');
+    });
+
+    it('respects explicit LTR direction', () => {
+      const input = `Direction: ltr
+
+داخلي - قهوة - نهار`;
+
+      const script = parse(input);
+      expect(script.direction).toBe('ltr');
+    });
+  });
+
+  describe('title page edge cases', () => {
+    it('aborts title page when first line is not a key-value pair', () => {
+      const input = `سمير قاعد في القهوة.
+
+داخلي - قهوة - نهار`;
+
+      const script = parse(input);
+      expect(script.titleEntries).toHaveLength(0);
+      // The first line should be parsed as body content
+      const nonBlank = script.tokens.filter((t) => t.type !== 'blank');
+      expect(nonBlank.length).toBeGreaterThan(0);
     });
   });
 });

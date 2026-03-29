@@ -5,11 +5,11 @@ describe('serializer', () => {
   describe('title page', () => {
     it('serializes simple title entries', () => {
       const script = Hekaya.parse(`العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 `);
       const output = serialize(script);
       expect(output).toContain('العنوان: آخر أيام الصيف');
-      expect(output).toContain('المؤلف: سمير عبدالحميد');
+      expect(output).toContain('سيناريو: سمير عبدالحميد');
     });
 
     it('serializes multi-line title values', () => {
@@ -60,10 +60,10 @@ describe('serializer', () => {
     });
 
     it('serializes character extensions', () => {
-      const script = Hekaya.parse(`\n@نادية (صوت خارجي)\nألو؟`);
+      const script = Hekaya.parse(`\n@نادية (صوت من خارج المشهد)\nألو؟`);
       const output = serialize(script);
       expect(output).toContain('نادية');
-      expect(output).toContain('صوت خارجي');
+      expect(output).toContain('صوت من خارج المشهد');
     });
 
     it('serializes parentheticals', () => {
@@ -127,7 +127,7 @@ describe('serializer', () => {
   describe('round-trip', () => {
     it('round-trips a complete screenplay', () => {
       const input = `العنوان: اختبار
-المؤلف: سمير
+سيناريو: سمير
 
 
 داخلي - قهوة بلدي - نهار
@@ -156,7 +156,7 @@ describe('serializer', () => {
 
     it('round-trips title page entries', () => {
       const input = `العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 مسودة: المسودة الأولى
 
 داخلي - قهوة - نهار`;
@@ -170,6 +170,33 @@ describe('serializer', () => {
         expect(script2.titleEntries[i].key).toBe(script1.titleEntries[i].key);
         expect(script2.titleEntries[i].value).toBe(script1.titleEntries[i].value);
       }
+    });
+  });
+
+  describe('edge cases', () => {
+    it('handles script with no title entries', () => {
+      const script = Hekaya.parse(`\nداخلي - قهوة - نهار`);
+      const output = serialize(script);
+      expect(output).toContain('داخلي - قهوة - نهار');
+      // Should not have title page separator
+      expect(output).not.toMatch(/^\n\n/);
+    });
+
+    it('serializes note_inline tokens from manually built scripts', () => {
+      const script = {
+        titleEntries: [],
+        tokens: [
+          { type: 'note_inline' as const, text: 'ملاحظة للمخرج' },
+          { type: 'boneyard' as const, text: 'مشهد محذوف' },
+          { type: 'unknown_type' as const, text: 'نص عشوائي' },
+        ],
+        direction: 'rtl' as const,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const output = serialize(script as any);
+      expect(output).toContain('[[ملاحظة للمخرج]]');
+      expect(output).toContain('/* مشهد محذوف */');
+      expect(output).toContain('نص عشوائي');
     });
   });
 });

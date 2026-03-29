@@ -6,7 +6,7 @@ describe('rules', () => {
     it('matches Arabic scene heading keywords', () => {
       expect(rules.SCENE_HEADING.test('داخلي. قهوة بلدي - نهار')).toBe(true);
       expect(rules.SCENE_HEADING.test('خارجي. شارع - ليل')).toBe(true);
-      expect(rules.SCENE_HEADING.test('تأسيس. القاهرة')).toBe(true);
+      expect(rules.SCENE_HEADING.test('لقطة تأسيسية. القاهرة')).toBe(true);
       expect(rules.SCENE_HEADING.test('داخلي/خارجي. سيارة - غروب')).toBe(true);
       expect(rules.SCENE_HEADING.test('خارجي/داخلي. سيارة - غروب')).toBe(true);
       expect(rules.SCENE_HEADING.test('د/خ. عربية')).toBe(true);
@@ -77,9 +77,9 @@ describe('rules', () => {
     });
 
     it('matches @ prefix with extension', () => {
-      const match = '@سمير (صوت خارجي)'.match(rules.CHARACTER_FORCED);
+      const match = '@سمير (صوت من خارج المشهد)'.match(rules.CHARACTER_FORCED);
       expect(match).not.toBeNull();
-      expect(match![1]).toBe('سمير (صوت خارجي)');
+      expect(match![1]).toBe('سمير (صوت من خارج المشهد)');
     });
 
     it('matches @ prefix with English name', () => {
@@ -143,6 +143,25 @@ describe('rules', () => {
       expect(rules.TRANSITION_ARABIC.test('عودة للمشهد')).toBe(true);
       expect(rules.TRANSITION_ARABIC.test('تلاشي إلى أسود')).toBe(true);
       expect(rules.TRANSITION_ARABIC.test('تلاشي إلى')).toBe(true);
+    });
+
+    it('matches new professional transition keywords', () => {
+      expect(rules.TRANSITION_ARABIC.test('قطع قافز')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('قطع مباشر')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('قطع خاطف')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('تلاشي')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('تلاشي إلى أبيض')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('مسح')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('وميض')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('تداخل مع')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('تجميد الكادر')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('شاشة منقسمة')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('مزج متطابق')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('تحول تدريجي')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('قزحية دخول')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('قزحية خروج')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('انتقال')).toBe(true);
+      expect(rules.TRANSITION_ARABIC.test('عودة إلى')).toBe(true);
     });
 
     it('matches with dashes (production script style)', () => {
@@ -215,7 +234,7 @@ describe('rules', () => {
     });
 
     it('matches key with empty value', () => {
-      const match = 'المؤلف:'.match(rules.TITLE_KEY);
+      const match = 'سيناريو:'.match(rules.TITLE_KEY);
       expect(match).not.toBeNull();
       expect(match![2]).toBe('');
     });

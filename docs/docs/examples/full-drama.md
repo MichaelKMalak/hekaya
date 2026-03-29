@@ -11,7 +11,7 @@ A complete drama screenplay written in Egyptian Arabic. A writer rediscovering h
 
 ```
 العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 مسودة: المسودة الأولى
 تاريخ: ٢٠٢٦/٢/٢٣
 تواصل: samir@example.com
@@ -91,7 +91,7 @@ A complete drama screenplay written in Egyptian Arabic. A writer rediscovering h
 شقة صغيرة بسيطة. سمير قاعد على كرسي قدام مكتب صغير. عليه أوراق كتير. بيمسك قلم وبيبدأ يكتب.
 
 @نادية
-(صوت خارجي - تليفون)
+(صوت من خارج المشهد - تليفون)
 ألو.. سمير؟ أنت فين؟ ليلى سألت عليك.
 
 @سمير
@@ -99,7 +99,7 @@ A complete drama screenplay written in Egyptian Arabic. A writer rediscovering h
 قوليلها أنا بخير. هرجع بدري.
 
 @نادية
-(صوت خارجي - تليفون)
+(صوت من خارج المشهد - تليفون)
 بدري يعني إمتى؟ كل يوم بتقول بدري.
 
 @سمير
@@ -117,10 +117,10 @@ A complete drama screenplay written in Egyptian Arabic. A writer rediscovering h
 
 ## Elements Used
 
-- **Title page** with Arabic keys (`العنوان`, `المؤلف`, `مسودة`, `تاريخ`, `تواصل`)
+- **Title page** with Arabic keys (`العنوان`, `سيناريو`, `مسودة`, `تاريخ`, `تواصل`)
 - **Scene headings** using Arabic keywords (`داخلي`, `خارجي`)
 - **3 characters**: سمير، حسن، نادية
-- **Parentheticals** in Egyptian dialect (`لنفسه`, `بفرحة`, `صوت خارجي - تليفون`)
+- **Parentheticals** in Egyptian dialect (`لنفسه`, `بفرحة`, `صوت من خارج المشهد - تليفون`)
 - **Transitions**: `- قطع -`, `- اختفاء تدريجي -`
 - **Centered text**: `>آخر أيام الصيف<`
 

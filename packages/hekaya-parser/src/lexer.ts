@@ -16,7 +16,7 @@ import type {
 } from './types';
 
 import * as rules from './rules';
-import { TITLE_KEYS_AR, TITLE_KEYS_EN, DIRECTION_VALUES_AR } from './keywords';
+import { TITLE_KEYS_AR, TITLE_KEYS_EN } from './keywords';
 import { CharacterRegistry } from './character-registry';
 import { detectDirection } from './bidi';
 
@@ -122,9 +122,9 @@ function parseTitlePage(text: string): {
       // Check for direction key
       if (currentKey === 'direction') {
         const normalized = value.toLowerCase().trim();
-        if (normalized === 'rtl' || DIRECTION_VALUES_AR[normalized] === 'rtl') {
+        if (normalized === 'rtl') {
           explicitDirection = 'rtl';
-        } else if (normalized === 'ltr' || DIRECTION_VALUES_AR[normalized] === 'ltr') {
+        } else if (normalized === 'ltr') {
           explicitDirection = 'ltr';
         }
       }
@@ -442,7 +442,7 @@ function parseCharacterLine(text: string, forced: boolean): HekayaToken {
     characterName = text.replace(rules.DUAL_DIALOGUE, '').trim();
   }
 
-  // Extract extension like (V.O.) or (صوت خارجي)
+  // Extract extension like (V.O.) or (صوت من خارج المشهد)
   const extMatch = characterName.match(rules.CHARACTER_EXTENSION);
   if (extMatch) {
     characterExtension = extMatch[1].trim();

@@ -19,7 +19,7 @@ Hekaya is to Egyptian and Arabic-speaking screenwriters what Fountain is to Engl
 
 <pre dir="rtl">
 العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 
 داخلي - قهوة بلدي - نهار
 

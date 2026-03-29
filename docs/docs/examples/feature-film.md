@@ -17,7 +17,7 @@ This sample demonstrates:
 
 ```
 العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 مسودة: المسودة الأولى
 تاريخ: ٢٠٢٦/٢/٢٣
 تواصل: samir@example.com
@@ -45,7 +45,7 @@ This sample demonstrates:
 
 - `@سمير` — the protagonist
 - `@حسن` — his friend
-- `@نادية` — phone voice (صوت خارجي)
+- `@نادية` — phone voice (صوت من خارج المشهد)
 
 ### Transitions (Arabic)
 
@@ -63,7 +63,7 @@ This sample demonstrates:
 (من غير ما يبص)
 (مندهش)
 (بهدوء)
-(صوت خارجي - تليفون)
+(صوت من خارج المشهد - تليفون)
 (وهو بيكتب)
 (بيبتسم)
 ```

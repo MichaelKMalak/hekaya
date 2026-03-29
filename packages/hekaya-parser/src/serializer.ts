@@ -84,8 +84,9 @@ function serializeTokens(tokens: HekayaToken[]): string {
         if (token.characterExtension) {
           name = `${name} (${token.characterExtension})`;
         }
-        // Always use @ prefix for forced characters (Arabic names)
-        if (token.forced) {
+        // Always prefix with @ to ensure round-trip fidelity.
+        // Arabic has no uppercase, so @ is the only reliable marker.
+        if (!name.startsWith('@')) {
           name = `@${name}`;
         }
         if (token.dualDialogue) {

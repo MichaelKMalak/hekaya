@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, type MockInstance, beforeEach, afterEach } from 'vitest';
 import { readFileSync, writeFileSync, unlinkSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -16,7 +16,7 @@ const NO_TITLE_CONTENT = `داخلي - غرفة - نهار
 
 // Fixture with empty body
 const EMPTY_BODY_CONTENT = `العنوان: اختبار
-المؤلف: سمير
+سيناريو: سمير
 `;
 
 // Fixture with no scene headings
@@ -30,16 +30,24 @@ function tmpPath(name: string): string {
   return join(tmpdir(), `hekaya-test-${Date.now()}-${name}`);
 }
 
+// Vitest 2.x MockInstance is strict about overloaded function signatures (e.g. process.stdout.write).
+// Use the default generic which accepts any Procedure.
+type SpyFn = MockInstance;
+
 describe('parse command', () => {
-  let mockStdoutWrite: ReturnType<typeof vi.spyOn>;
-  let mockConsoleError: ReturnType<typeof vi.spyOn>;
-  let mockProcessExit: ReturnType<typeof vi.spyOn>;
+  let mockStdoutWrite: SpyFn;
+  let mockConsoleError: SpyFn;
+  let mockProcessExit: SpyFn;
 
   beforeEach(() => {
-    mockStdoutWrite = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
+    mockStdoutWrite = vi
+      .spyOn(process.stdout, 'write')
+      .mockImplementation(() => true) as unknown as SpyFn;
     vi.spyOn(console, 'log').mockImplementation(() => {});
-    mockConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-    mockProcessExit = vi.spyOn(process, 'exit').mockImplementation(() => undefined as never);
+    mockConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {}) as unknown as SpyFn;
+    mockProcessExit = vi
+      .spyOn(process, 'exit')
+      .mockImplementation(() => undefined as never) as unknown as SpyFn;
   });
 
   afterEach(() => {
@@ -101,15 +109,19 @@ describe('parse command', () => {
 });
 
 describe('render command', () => {
-  let mockStdoutWrite: ReturnType<typeof vi.spyOn>;
-  let mockConsoleError: ReturnType<typeof vi.spyOn>;
-  let mockProcessExit: ReturnType<typeof vi.spyOn>;
+  let mockStdoutWrite: SpyFn;
+  let mockConsoleError: SpyFn;
+  let mockProcessExit: SpyFn;
 
   beforeEach(() => {
-    mockStdoutWrite = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
+    mockStdoutWrite = vi
+      .spyOn(process.stdout, 'write')
+      .mockImplementation(() => true) as unknown as SpyFn;
     vi.spyOn(console, 'log').mockImplementation(() => {});
-    mockConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-    mockProcessExit = vi.spyOn(process, 'exit').mockImplementation(() => undefined as never);
+    mockConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {}) as unknown as SpyFn;
+    mockProcessExit = vi
+      .spyOn(process, 'exit')
+      .mockImplementation(() => undefined as never) as unknown as SpyFn;
   });
 
   afterEach(() => {
@@ -152,13 +164,15 @@ describe('render command', () => {
 });
 
 describe('export command', () => {
-  let mockConsoleError: ReturnType<typeof vi.spyOn>;
-  let mockProcessExit: ReturnType<typeof vi.spyOn>;
+  let mockConsoleError: SpyFn;
+  let mockProcessExit: SpyFn;
 
   beforeEach(() => {
     vi.spyOn(console, 'log').mockImplementation(() => {});
-    mockConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-    mockProcessExit = vi.spyOn(process, 'exit').mockImplementation(() => undefined as never);
+    mockConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {}) as unknown as SpyFn;
+    mockProcessExit = vi
+      .spyOn(process, 'exit')
+      .mockImplementation(() => undefined as never) as unknown as SpyFn;
   });
 
   afterEach(() => {
@@ -191,14 +205,16 @@ describe('export command', () => {
 });
 
 describe('validate command', () => {
-  let mockConsoleLog: ReturnType<typeof vi.spyOn>;
-  let mockConsoleError: ReturnType<typeof vi.spyOn>;
-  let mockProcessExit: ReturnType<typeof vi.spyOn>;
+  let mockConsoleLog: SpyFn;
+  let mockConsoleError: SpyFn;
+  let mockProcessExit: SpyFn;
 
   beforeEach(() => {
-    mockConsoleLog = vi.spyOn(console, 'log').mockImplementation(() => {});
-    mockConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-    mockProcessExit = vi.spyOn(process, 'exit').mockImplementation(() => undefined as never);
+    mockConsoleLog = vi.spyOn(console, 'log').mockImplementation(() => {}) as unknown as SpyFn;
+    mockConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {}) as unknown as SpyFn;
+    mockProcessExit = vi
+      .spyOn(process, 'exit')
+      .mockImplementation(() => undefined as never) as unknown as SpyFn;
   });
 
   afterEach(() => {
@@ -263,6 +279,52 @@ describe('validate command', () => {
     }
   });
 
+  it('reports orphaned dialogue', async () => {
+    // Dialogue that appears after a scene heading (not after a character)
+    const orphanContent = `العنوان: اختبار
+
+داخلي - غرفة - نهار
+
+أنا هنا.
+`;
+    const tmpFile = tmpPath('orphan-dialogue.hekaya');
+    writeFileSync(tmpFile, orphanContent, 'utf-8');
+
+    try {
+      const { validateCommand } = await import('../src/commands/validate');
+      await validateCommand.parseAsync(['node', 'hekaya', tmpFile]);
+
+      // This script has no orphaned dialogue (action is not dialogue)
+      // Valid screenplay but with no character/dialogue blocks
+      expect(mockProcessExit).not.toHaveBeenCalled();
+    } finally {
+      if (existsSync(tmpFile)) unlinkSync(tmpFile);
+    }
+  });
+
+  it('reports missing title key when title page exists', async () => {
+    const missingTitleContent = `سيناريو: سمير
+
+داخلي - غرفة - نهار
+
+@سمير
+أنا هنا.
+`;
+    const tmpFile = tmpPath('missing-title-key.hekaya');
+    writeFileSync(tmpFile, missingTitleContent, 'utf-8');
+
+    try {
+      const { validateCommand } = await import('../src/commands/validate');
+      await validateCommand.parseAsync(['node', 'hekaya', tmpFile]);
+
+      const allOutput = mockConsoleLog.mock.calls.map((c) => c[0]).join('\n');
+      expect(allOutput).toContain('Missing title');
+      expect(mockProcessExit).toHaveBeenCalledWith(1);
+    } finally {
+      if (existsSync(tmpFile)) unlinkSync(tmpFile);
+    }
+  });
+
   it('exits 1 on file read error', async () => {
     const { validateCommand } = await import('../src/commands/validate');
     await validateCommand.parseAsync(['node', 'hekaya', '/nonexistent/file.hekaya']);
@@ -273,13 +335,15 @@ describe('validate command', () => {
 });
 
 describe('convert command', () => {
-  let mockConsoleError: ReturnType<typeof vi.spyOn>;
-  let mockProcessExit: ReturnType<typeof vi.spyOn>;
+  let mockConsoleError: SpyFn;
+  let mockProcessExit: SpyFn;
 
   beforeEach(() => {
     vi.spyOn(console, 'log').mockImplementation(() => {});
-    mockConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-    mockProcessExit = vi.spyOn(process, 'exit').mockImplementation(() => undefined as never);
+    mockConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {}) as unknown as SpyFn;
+    mockProcessExit = vi
+      .spyOn(process, 'exit')
+      .mockImplementation(() => undefined as never) as unknown as SpyFn;
   });
 
   afterEach(() => {
@@ -318,6 +382,59 @@ describe('convert command', () => {
       expect(reparsed.tokens.length).toBeGreaterThan(0);
     } finally {
       if (existsSync(outPath)) unlinkSync(outPath);
+    }
+  });
+
+  it('auto-generates .fountain output for .hekaya input', async () => {
+    const tmpFile = tmpPath('auto-ext.hekaya');
+    const expectedOut = tmpFile.replace(/\.hekaya$/, '.fountain');
+    writeFileSync(tmpFile, readFileSync(FIXTURE_PATH, 'utf-8'), 'utf-8');
+
+    try {
+      vi.resetModules();
+      const { convertCommand } = await import('../src/commands/convert');
+      await convertCommand.parseAsync(['node', 'hekaya', tmpFile]);
+
+      expect(existsSync(expectedOut)).toBe(true);
+      const content = readFileSync(expectedOut, 'utf-8');
+      expect(content.length).toBeGreaterThan(0);
+    } finally {
+      if (existsSync(tmpFile)) unlinkSync(tmpFile);
+      if (existsSync(expectedOut)) unlinkSync(expectedOut);
+    }
+  });
+
+  it('auto-generates .hekaya output for .fountain input', async () => {
+    const tmpFile = tmpPath('auto-ext.fountain');
+    const expectedOut = tmpFile.replace(/\.fountain$/, '.hekaya');
+    writeFileSync(tmpFile, readFileSync(FIXTURE_PATH, 'utf-8'), 'utf-8');
+
+    try {
+      vi.resetModules();
+      const { convertCommand } = await import('../src/commands/convert');
+      await convertCommand.parseAsync(['node', 'hekaya', tmpFile]);
+
+      expect(existsSync(expectedOut)).toBe(true);
+    } finally {
+      if (existsSync(tmpFile)) unlinkSync(tmpFile);
+      if (existsSync(expectedOut)) unlinkSync(expectedOut);
+    }
+  });
+
+  it('appends .fountain for unknown extension', async () => {
+    const tmpFile = tmpPath('auto-ext.txt');
+    const expectedOut = tmpFile + '.fountain';
+    writeFileSync(tmpFile, readFileSync(FIXTURE_PATH, 'utf-8'), 'utf-8');
+
+    try {
+      vi.resetModules();
+      const { convertCommand } = await import('../src/commands/convert');
+      await convertCommand.parseAsync(['node', 'hekaya', tmpFile]);
+
+      expect(existsSync(expectedOut)).toBe(true);
+    } finally {
+      if (existsSync(tmpFile)) unlinkSync(tmpFile);
+      if (existsSync(expectedOut)) unlinkSync(expectedOut);
     }
   });
 

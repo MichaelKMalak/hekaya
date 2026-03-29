@@ -6,7 +6,7 @@ describe('renderer', () => {
   describe('full document', () => {
     it('renders a complete HTML document', () => {
       const script = Hekaya.parse(`العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 
 داخلي - قهوة بلدي - نهار
 
@@ -46,7 +46,7 @@ Hello there.`);
   describe('title page', () => {
     it('renders title page with Arabic keys', () => {
       const script = Hekaya.parse(`العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 مسودة: المسودة الأولى
 
 داخلي - قهوة - نهار`);
@@ -95,10 +95,10 @@ Hello there.`);
     });
 
     it('renders character extension', () => {
-      const script = Hekaya.parse(`\n@نادية (صوت خارجي)\nألو؟`);
+      const script = Hekaya.parse(`\n@نادية (صوت من خارج المشهد)\nألو؟`);
       const html = render(script, { fullDocument: false });
       expect(html).toContain('class="extension"');
-      expect(html).toContain('صوت خارجي');
+      expect(html).toContain('صوت من خارج المشهد');
     });
 
     it('renders dialogue', () => {
@@ -217,6 +217,28 @@ Hello there.`);
     });
   });
 
+  describe('dual dialogue', () => {
+    it('renders dual dialogue columns', () => {
+      const script = Hekaya.parse(`\n@سمير\nأنا هنا.\n\n@نادية ^\nأنا كمان.`);
+      const html = render(script, { fullDocument: false });
+      expect(html).toContain('class="dual-dialogue"');
+      expect(html).toContain('class="dual-column"');
+      expect(html).toContain('سمير');
+      expect(html).toContain('نادية');
+      expect(html).toContain('أنا هنا.');
+      expect(html).toContain('أنا كمان.');
+    });
+
+    it('renders dual dialogue with parentheticals', () => {
+      const script = Hekaya.parse(`\n@سمير\n(بغضب)\nإيه ده؟\n\n@نادية ^\n(بهدوء)\nمتزعلش.`);
+      const html = render(script, { fullDocument: false });
+      expect(html).toContain('class="dual-dialogue"');
+      expect(html).toContain('class="parenthetical"');
+      expect(html).toContain('(بغضب)');
+      expect(html).toContain('(بهدوء)');
+    });
+  });
+
   describe('edge cases', () => {
     it('renders empty token array', () => {
       const script = Hekaya.parse('');
@@ -237,12 +259,18 @@ Hello there.`);
       const html = render(script, { fullDocument: false });
       expect(typeof html).toBe('string');
     });
+
+    it('defaults page title to Hekaya Screenplay when no title entry', () => {
+      const script = Hekaya.parse('\nداخلي - غرفة - نهار');
+      const html = render(script);
+      expect(html).toContain('<title>Hekaya Screenplay</title>');
+    });
   });
 
   describe('integration', () => {
     it('renders a complete Arabic screenplay', () => {
       const script = Hekaya.parse(`العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 
 داخلي - قهوة بلدي - نهار
 

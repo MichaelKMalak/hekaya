@@ -6,7 +6,7 @@ describe('pdf-generator', () => {
   describe('basic generation', () => {
     it('generates a valid PDF buffer', async () => {
       const script = Hekaya.parse(`العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 
 داخلي - قهوة بلدي - نهار
 
@@ -31,7 +31,7 @@ describe('pdf-generator', () => {
   describe('title page', () => {
     it('includes title page by default', async () => {
       const script = Hekaya.parse(`العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 
 داخلي - قهوة - نهار`);
 
@@ -118,7 +118,7 @@ Hello there.`);
     });
 
     it('handles character extensions', async () => {
-      const script = Hekaya.parse(`\n@نادية (صوت خارجي)\nألو؟`);
+      const script = Hekaya.parse(`\n@نادية (صوت من خارج المشهد)\nألو؟`);
       const pdf = await generatePdf(script);
       expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
     });
@@ -172,7 +172,7 @@ Hello there.`);
   describe('integration', () => {
     it('renders a complete Arabic screenplay', async () => {
       const script = Hekaya.parse(`العنوان: آخر أيام الصيف
-المؤلف: سمير عبدالحميد
+سيناريو: سمير عبدالحميد
 مسودة: المسودة الأولى
 
 داخلي - قهوة بلدي - نهار
@@ -207,8 +207,8 @@ Hello there.`);
   describe('title page formatting', () => {
     it('generates PDF with formatted title (bold/italic markers)', async () => {
       const script = Hekaya.parse(`العنوان: _**الليلة الكبيرة**_
-تأليف: قصة أصلية
-المؤلف: أحمد محمود
+المصدر: قصة أصلية
+سيناريو: أحمد محمود
 
 داخلي - شقة - ليل`);
 
@@ -217,13 +217,13 @@ Hello there.`);
       expect(pdf.length).toBeGreaterThan(1000);
     });
 
-    it('generates PDF with credit keyword تأليف', async () => {
+    it('generates PDF with تأليف keyword mapped to author', async () => {
       const script = Hekaya.parse(`العنوان: اختبار
-تأليف: قصة أصلية
+تأليف: أحمد محمود
 
 داخلي - قهوة - نهار`);
 
-      expect(script.titleEntries.find((e) => e.key === 'credit')).toBeDefined();
+      expect(script.titleEntries.find((e) => e.key === 'author')).toBeDefined();
       const pdf = await generatePdf(script);
       expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
     });
