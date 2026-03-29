@@ -40,6 +40,14 @@ jobs:
           cache: pnpm
           registry-url: 'https://registry.npmjs.org'
       - run: pnpm install --frozen-lockfile
+      - name: Sync package versions from root
+        shell: bash
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          for pkg in packages/hekaya-parser packages/hekaya-renderer packages/hekaya-pdf apps/hekaya-cli; do
+            node -e "const p=require('./$pkg/package.json'); p.version='$VERSION'; require('fs').writeFileSync('./$pkg/package.json', JSON.stringify(p, null, 2) + '\n')"
+          done
+          echo "All packages synced to v$VERSION"
       - run: pnpm --filter @hekaya/pdf fonts
       - run: pnpm build
       - run: pnpm --filter @hekaya/parser publish --no-git-checks --access public
