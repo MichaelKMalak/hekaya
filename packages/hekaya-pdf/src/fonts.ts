@@ -8,8 +8,8 @@
  *
  * English (LTR) always uses Courier.
  *
- * Font files live in ../fonts/ and are NOT committed to git.
- * Run `pnpm fonts` to download them.
+ * Font files live in ../fonts/ and are bundled with the npm package.
+ * Run `pnpm fonts` to re-download if needed during development.
  */
 
 import { existsSync } from 'node:fs';
@@ -35,7 +35,7 @@ export function getFontPaths(customFontsDir?: string): Record<string, Record<str
   if (!existsSync(cascadiaLight)) {
     throw new Error(
       `Font file not found: ${cascadiaLight}\n` +
-        'Run `pnpm fonts` in packages/hekaya-pdf to download fonts.',
+        'Fonts should be bundled with the package. If developing locally, run `pnpm fonts` in packages/hekaya-pdf.',
     );
   }
 

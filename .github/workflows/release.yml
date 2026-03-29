@@ -52,9 +52,14 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Bundle CLI
-        run: pnpm exec esbuild apps/hekaya-cli/dist/index.js --bundle --platform=node --outfile=hekaya-${{ matrix.target }}.cjs --external:@digicole/pdfmake-rtl
+        run: |
+          pnpm exec esbuild apps/hekaya-cli/dist/index.js --bundle --platform=node --outfile=dist/hekaya.cjs --external:@digicole/pdfmake-rtl
+          mkdir -p dist/fonts
+          cp packages/hekaya-pdf/fonts/CascadiaMono-Light.ttf packages/hekaya-pdf/fonts/CascadiaMono-Regular.ttf packages/hekaya-pdf/fonts/Courier-Regular.ttf packages/hekaya-pdf/fonts/Courier-Bold.ttf dist/fonts/
+      - name: Create archive
+        run: tar -czf hekaya-${{ matrix.target }}.tar.gz -C dist .
       - name: Upload binary
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.release-please.outputs.tag_name || github.event.inputs.tag_name }}
-          files: hekaya-${{ matrix.target }}.cjs
+          files: hekaya-${{ matrix.target }}.tar.gz

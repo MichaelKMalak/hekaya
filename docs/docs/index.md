@@ -45,15 +45,16 @@ Hekaya fills this gap with:
 
 ## Try It
 
-Download a pre-built binary from the [Releases page](https://github.com/michaelkmalak/hekaya/releases) — no installation needed, just [Node.js](https://nodejs.org/) 20+:
+Download a pre-built binary from the [Releases page](https://github.com/michaelkmalak/hekaya/releases) — no installation needed, just [Node.js](https://nodejs.org/) 20+. Fonts for PDF export are bundled — no extra downloads required.
 
 ```bash
-# Download the binary for your platform (example: macOS ARM)
-curl -LO https://github.com/michaelkmalak/hekaya/releases/latest/download/hekaya-macos-arm64.cjs
+# Download and extract for your platform (example: macOS ARM)
+curl -LO https://github.com/michaelkmalak/hekaya/releases/latest/download/hekaya-macos-arm64.tar.gz
+tar -xzf hekaya-macos-arm64.tar.gz
 
 # Run it
-node hekaya-macos-arm64.cjs render script.hekaya -o script.html
-node hekaya-macos-arm64.cjs export script.hekaya -o script.pdf
+node hekaya.cjs render script.hekaya -o script.html
+node hekaya.cjs export script.hekaya -o script.pdf
 ```
 
 Or build from source:

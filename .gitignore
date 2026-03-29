@@ -6,7 +6,13 @@ dist/
 coverage/
 .env
 .env.*
-packages/hekaya-pdf/fonts/*.ttf
-packages/hekaya-pdf/fonts/*.otf
+# PDF fonts — only bundle the 4 actively used fonts; ignore legacy/unused ones
+packages/hekaya-pdf/fonts/Amiri-*.ttf
+packages/hekaya-pdf/fonts/NotoNaskh*.ttf
+packages/hekaya-pdf/fonts/GNUUnifont.otf
+packages/hekaya-pdf/fonts/CascadiaMono-Bold.ttf
+packages/hekaya-pdf/fonts/CascadiaMono-BoldItalic.ttf
+packages/hekaya-pdf/fonts/CascadiaMono-Italic.ttf
+packages/hekaya-pdf/fonts/CascadiaMono-LightItalic.ttf
 docs/build/
 docs/.docusaurus/
