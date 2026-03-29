@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.1](https://github.com/MichaelKMalak/hekaya/compare/v1.4.0...v1.4.1) (2026-03-29)
+
+
+### Bug Fixes
+
+* unified versioning for all npm packages ([1bf784b](https://github.com/MichaelKMalak/hekaya/commit/1bf784bce79179ab7a2320072b191d8f02d12e55))
+* use bash shell for Windows binary bundling ([4282b19](https://github.com/MichaelKMalak/hekaya/commit/4282b19c0585eebd4c49b0d895249013edd2f782))
+
 ## [1.4.0](https://github.com/MichaelKMalak/hekaya/compare/v1.3.0...v1.4.0) (2026-03-29)
 
 
