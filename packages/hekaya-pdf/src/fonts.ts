@@ -16,8 +16,10 @@ import { existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const FONTS_DIR = resolve(__dirname, '..', 'fonts');
+// Use import.meta.url when available (ESM), fall back to __dirname for CJS bundles
+const _currentDir =
+  typeof import.meta.url === 'string' ? dirname(fileURLToPath(import.meta.url)) : __dirname;
+const FONTS_DIR = resolve(_currentDir, '..', 'fonts');
 
 /**
  * Get font file paths for PdfPrinter constructor.
