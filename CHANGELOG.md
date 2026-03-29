@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/MichaelKMalak/hekaya/compare/v1.4.2...v1.5.0) (2026-03-29)
+
+
+### Features
+
+* add --include-notes flag to export inline notes in PDF ([6ed674d](https://github.com/MichaelKMalak/hekaya/commit/6ed674dc6cd72abca132a3e3927296562cc09717))
+
 ## [1.4.2](https://github.com/MichaelKMalak/hekaya/compare/v1.4.1...v1.4.2) (2026-03-29)
 
 
